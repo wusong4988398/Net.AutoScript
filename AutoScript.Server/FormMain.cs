@@ -75,6 +75,7 @@ namespace AutoScript.Server
 
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
+            return;
             Device.Reload();
             //dgvList.DataSource = new BindingList<IDevice>(Device.GetAllDevices());
             List<Account> accounts = (List<Account>)dgvList.DataSource;
