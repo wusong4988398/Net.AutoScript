@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoScript.Share", "AutoScript.Share\AutoScript.Share.csproj", "{64F260FE-7BD9-4E85-9159-C6C14631DD2F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoScript.Server", "AutoScript.Server\AutoScript.Server.csproj", "{A81243E3-0F1E-42F9-8E0C-7771E9EE6B93}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net.AutoScript.Client", "Net.AutoScript.Client\Net.AutoScript.Client.csproj", "{361369AB-147E-436B-9A43-D0AA4FD7CDC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64F260FE-7BD9-4E85-9159-C6C14631DD2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64F260FE-7BD9-4E85-9159-C6C14631DD2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64F260FE-7BD9-4E85-9159-C6C14631DD2F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{64F260FE-7BD9-4E85-9159-C6C14631DD2F}.Debug|x86.Build.0 = Debug|Any CPU
+		{64F260FE-7BD9-4E85-9159-C6C14631DD2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64F260FE-7BD9-4E85-9159-C6C14631DD2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64F260FE-7BD9-4E85-9159-C6C14631DD2F}.Release|x86.ActiveCfg = Release|Any CPU
+		{64F260FE-7BD9-4E85-9159-C6C14631DD2F}.Release|x86.Build.0 = Release|Any CPU
+		{A81243E3-0F1E-42F9-8E0C-7771E9EE6B93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A81243E3-0F1E-42F9-8E0C-7771E9EE6B93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A81243E3-0F1E-42F9-8E0C-7771E9EE6B93}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A81243E3-0F1E-42F9-8E0C-7771E9EE6B93}.Debug|x86.Build.0 = Debug|Any CPU
+		{A81243E3-0F1E-42F9-8E0C-7771E9EE6B93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A81243E3-0F1E-42F9-8E0C-7771E9EE6B93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A81243E3-0F1E-42F9-8E0C-7771E9EE6B93}.Release|x86.ActiveCfg = Release|Any CPU
+		{A81243E3-0F1E-42F9-8E0C-7771E9EE6B93}.Release|x86.Build.0 = Release|Any CPU
+		{361369AB-147E-436B-9A43-D0AA4FD7CDC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{361369AB-147E-436B-9A43-D0AA4FD7CDC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{361369AB-147E-436B-9A43-D0AA4FD7CDC0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{361369AB-147E-436B-9A43-D0AA4FD7CDC0}.Debug|x86.Build.0 = Debug|Any CPU
+		{361369AB-147E-436B-9A43-D0AA4FD7CDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{361369AB-147E-436B-9A43-D0AA4FD7CDC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{361369AB-147E-436B-9A43-D0AA4FD7CDC0}.Release|x86.ActiveCfg = Release|Any CPU
+		{361369AB-147E-436B-9A43-D0AA4FD7CDC0}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {38CBC1A2-A44B-4808-96CD-C617E0644EE6}
+	EndGlobalSection
+EndGlobal

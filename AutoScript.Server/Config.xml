@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+
+	<object name="Config" type="AutoScript.Share.Config, AutoScript.Share">
+		<property name="Config_DM" ref="Config_DM"/>
+		<property name="Config_GameWindow" ref="GameWindow"/>
+	</object>
+	<object name="Config_DM" type="AutoScript.Share.Config_DM, AutoScript.Share">
+		<property name="Display" value="dx2"/>
+		<property name="Mouse" value="windows"/>
+		<property name="KeyBorad" value="windows"/>
+		<property name="Mode" value="0"/>
+		<property name="Path" value="pic"/>
+	</object>
+	<object name="GameWindow" type="AutoScript.Share.Config_GameWindow, AutoScript.Share">
+		<property name="MemProcessName" value="Ld9BoxHeadless"/>
+		<property name="WindowProcessName" value="dnplayer"/>
+		<property name="WindowTitle" value="TheRender"/>
+		<property name="WindowClassName" value="RenderWindow"/>
+		<property name="PackageName" value="com.ledo.areal.ledo/.MyGame"/>
+	</object>
+	<!--设备对象-->
+	<object name="Device" type="AutoScript.Share.DeviceSimulator,AutoScript.Share" singleton="false"></object>
+	<!--设备输入对象-->
+	<object name="DeviceInput" type="AutoScript.Share.DmInput, AutoScript.Share" singleton="false"></object>
+	<!--脚本功能对象-->
+	<object name="ScriptExecutor" type="AutoScript.Server.梦幻西游, AutoScript.Server" singleton="false"></object>
+	<!--脚本辅助对象-->
+	<object name="GameHelper" type="AutoScript.Server.GameHelper, AutoScript.Server" singleton="false"></object>
+	<!--单人任务控制器对象-->
+	<object name="SingleController" type="AutoScript.Server.SingleController, AutoScript.Server"></object>
+	<!--组队任务控制器对象-->
+	<object name="TeamController" type="AutoScript.Server.TeamController, AutoScript.Server"></object>
+</objects>

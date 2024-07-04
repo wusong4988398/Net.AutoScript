@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AutoScript.Share.Device" Collapsed="true">
+    <Position X="8.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAEAAAAACAAAAKAAAgAAACAAAAAAAAgA=</HashCode>
+      <FileName>Device\Device.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AutoScript.Share.DevicePC" Collapsed="true">
+    <Position X="9.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Device\DevicePC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoScript.Share.DeviceSimulator" Collapsed="true">
+    <Position X="7.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Device\DeviceSimulator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoScript.Share.ADBInput" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEABAAAAgAAAAgFAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DeviceHandler\ADBInput.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AutoScript.Share.DeviceHandler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAEgRAAAAoAUAEgEAAEAAIAAggAKAAAEAgAQAAA=</HashCode>
+      <FileName>DeviceHandler\DeviceHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.161" />
+  </Class>
+  <Class Name="AutoScript.Share.DeviceScreenDm" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAiAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DeviceHandler\DeviceScreenDm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AutoScript.Share.DmInput" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEABAAAAoAAAAgEAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DeviceHandler\DmInput.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AutoScript.Share.Memory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAACAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DeviceHandler\Memory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AutoScript.Share.Packet" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAEAAAAAAAIAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>DeviceHandler\Packet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="AutoScript.Share.IDevice" Collapsed="true">
+    <Position X="8.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAACAAAAKAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Device\IDevice.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AutoScript.Share.IDeviceInput" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEABAAAAgAAAAgEAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DeviceHandler\IDeviceInput.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AutoScript.Share.IDeviceMemory" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DeviceHandler\IDeviceMemory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AutoScript.Share.IDevicePacket" Collapsed="true">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAIAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>DeviceHandler\IDevicePacket.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AutoScript.Share.IDeviceScreen" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DeviceHandler\IDeviceScreen.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
