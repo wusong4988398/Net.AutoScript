@@ -6,21 +6,30 @@
 		<property name="Config_GameWindow" ref="GameWindow"/>
 	</object>
 	<object name="Config_DM" type="AutoScript.Share.Config_DM, AutoScript.Share">
-		<property name="Display" value="dx2"/>
+		<property name="Display" value="gdi"/>
 		<property name="Mouse" value="windows"/>
 		<property name="KeyBorad" value="windows"/>
 		<property name="Mode" value="0"/>
 		<property name="Path" value="pic"/>
 	</object>
-	<object name="GameWindow" type="AutoScript.Share.Config_GameWindow, AutoScript.Share">
+	<!--<object name="GameWindow" type="AutoScript.Share.Config_GameWindow, AutoScript.Share">
 		<property name="MemProcessName" value="Ld9BoxHeadless"/>
 		<property name="WindowProcessName" value="dnplayer"/>
 		<property name="WindowTitle" value="TheRender"/>
 		<property name="WindowClassName" value="RenderWindow"/>
 		<property name="PackageName" value="com.ledo.areal.ledo/.MyGame"/>
+	</object>-->
+
+	<object name="GameWindow" type="AutoScript.Share.Config_GameWindow, AutoScript.Share">
+		<property name="MemProcessName" value="MyGame_x64r"/>
+		<property name="WindowProcessName" value="MyGame_x64r"/>
+		<property name="WindowTitle" value="梦幻西游：时空"/>
+		<property name="WindowClassName" value=""/>
+		<property name="PackageName" value="com.ledo.areal.ledo/.MyGame"/>
 	</object>
+	
 	<!--设备对象-->
-	<object name="Device" type="AutoScript.Share.DeviceSimulator,AutoScript.Share" singleton="false"></object>
+	<object name="Device" type="AutoScript.Share.DevicePC,AutoScript.Share" singleton="false"></object>
 	<!--设备输入对象-->
 	<object name="DeviceInput" type="AutoScript.Share.DmInput, AutoScript.Share" singleton="false"></object>
 	<!--脚本功能对象-->

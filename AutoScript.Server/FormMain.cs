@@ -106,7 +106,7 @@ namespace AutoScript.Server
             {
                 // 假设你想获取第一列（索引为0）的内容作为示例
                 string cellValue = row.Cells[3].Value?.ToString();
-                Account account = accounts.FirstOrDefault(t => t.Hwnd.ToString() == cellValue);
+                Account account = accounts.FirstOrDefault(t => t.Hwnd.ToString() == cellValue&&t.Hwnd>0);
                 if (account != null)
                 {
                     secList.Add(account);

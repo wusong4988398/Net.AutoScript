@@ -19,8 +19,8 @@ namespace AutoScript.Server
         private void 登入()
         {
             this._currentOperation = "登录操作中";
-            
-       
+
+            this.deviceHandler.点击(new ActionParam { Point = (595, 28),delay=500 });
             this.MainDelay(3000);
             
             Trace.WriteLine("登入" + Thread.CurrentThread.ManagedThreadId);

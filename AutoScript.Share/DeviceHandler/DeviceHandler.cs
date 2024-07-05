@@ -32,9 +32,14 @@ namespace AutoScript.Share
                 Config.AppConfig.Config_DM.KeyBorad,
                 Config.AppConfig.Config_DM.Mode);
             dm.SetPath( Config.AppConfig.Config_DM.Path);
-
+            dm.SetWindowSize(this.Device.Hwnd, 650, 500);
+            //dm.EnableRealKeypad(1);
+            //dm.SetKeypadDelay("normal", 30);
             //根据配置文件创建实现各个接口的对象,也可以直接new
-            deviceInput = (IDeviceInput)Config.applicationContext.GetObject("DeviceInput", new object[] { device});
+            //deviceInput = (IDeviceInput)Config.applicationContext.GetObject("DeviceInput", new object[] { device});
+
+
+            deviceInput = new DmInput(device,dm);
             deviceScreen = new DeviceScreenDm(device, dm);
             deviceMemory = new Memory(device);
             devicePacket = new Packet (device);

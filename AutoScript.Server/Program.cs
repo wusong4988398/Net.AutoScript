@@ -1,3 +1,5 @@
+using AutoScript.Share;
+
 namespace AutoScript.Server
 {
     internal static class Program
@@ -8,6 +10,25 @@ namespace AutoScript.Server
         [STAThread]
         static void Main()
         {
+
+
+            // 免注册调用大漠插件
+            //var registerDmSoftDllResult = RegisterDmSoft.RegisterDmSoftDll();
+            //Console.WriteLine($"免注册调用大漠插件返回：{registerDmSoftDllResult}");
+            //if (!registerDmSoftDllResult)
+            //{
+            //    throw new Exception("免注册调用大漠插件失败");
+            //}
+            //Dmsoft m_dm = new Dmsoft();
+
+            //// 收费注册
+            //int dm_ret = m_dm.Reg(DmConfig.DmRegCode, DmConfig.DmVerInfo);
+            //Console.WriteLine($"收费注册返回：{dm_ret}");
+            //if (dm_ret != 1)
+            //{
+            //    throw new MyException("收费注册失败,返回值:" + dm_ret.ToString());
+            //}
+
             //GameScript gameScript = new GameScript();
             //gameScript.Start();
 
