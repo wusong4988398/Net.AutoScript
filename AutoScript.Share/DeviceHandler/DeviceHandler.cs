@@ -41,7 +41,8 @@ namespace AutoScript.Share
 
 
             deviceInput = new DmInput(device,dm);
-            deviceScreen = new DeviceScreenDm(device, dm);
+            //deviceScreen = new DeviceScreenDm(device, dm);
+            deviceScreen = new GDIScreenFinder(new IntPtr(device.Hwnd));
             deviceMemory = new Memory(device);
             devicePacket = new Packet (device);
         }

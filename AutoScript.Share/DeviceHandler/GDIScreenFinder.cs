@@ -73,12 +73,20 @@ namespace AutoScript.Share
         public ImageInfo FindPic(ImageInfo imageInfo)
         {
             Bitmap bigBMP = 截屏(imageInfo.Range.x1, imageInfo.Range.y1, imageInfo.Range.x2, imageInfo.Range.y2);
-            Bitmap smallBmp = new Bitmap(imageInfo.PicName + ".bmp");
+            //Bitmap smallBmp = new Bitmap("D:\\gamescript\\CSharpScript\\AutoScript.Server\\bin\\Debug\\net8.0-windows\\Resource\\pic\\" + imageInfo.PicName + ".bmp");
+            Bitmap smallBmp = new Bitmap(AppContext.BaseDirectory + this.PicPath + "\\" + imageInfo.PicName + ".bmp");
+
+            // 获取应用程序所在目录（绝对，不受工作目录影响）
+
+            // 也可以获取应用程序所在目录
+            //string ss=AppContext.BaseDirectory;
+   
+    
             int similar = (int)((1 - imageInfo.Sim) * 255);
             List<Point> ret = FindPic(imageInfo.Range.x1, imageInfo.Range.y1, imageInfo.Range.x2 - imageInfo.Range.x1, imageInfo.Range.y2 - imageInfo.Range.y1, bigBMP, smallBmp, similar);
             if (ret.Count > 0)
             {
-                imageInfo.Result = (ret[0].X, ret[0].Y, true);
+                imageInfo.Result = (ret[0].X, ret[0].Y-30, true);
             }
             else
             {
@@ -299,7 +307,7 @@ namespace AutoScript.Share
                 }
             }
             sw.Stop();
-            Console.WriteLine(sw.ElapsedMilliseconds);
+            Trace.WriteLine(sw.ElapsedMilliseconds);
             return List;
         }
         /// <summary>
@@ -349,7 +357,7 @@ namespace AutoScript.Share
                 }
             }
             sw.Stop();
-            Console.WriteLine(sw.ElapsedMilliseconds);
+            Trace.WriteLine(sw.ElapsedMilliseconds);
             return List;
         }
         /// <summary>
@@ -451,7 +459,7 @@ namespace AutoScript.Share
             //List<Point> List = new List<Point>();
 
             sw.Stop();
-            Console.WriteLine("耗时:" + sw.ElapsedMilliseconds.ToString() + "毫秒");
+            Trace.WriteLine("耗时:" + sw.ElapsedMilliseconds.ToString() + "毫秒");
             for (int y = 0; y < iMax; y++)
             {
                 for (int x = 0; x < jMax; x++)
