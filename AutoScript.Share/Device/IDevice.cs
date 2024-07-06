@@ -12,6 +12,5 @@ namespace AutoScript.Share
         int Pid { get; set; }
         string Port { get; set; }
         string IP { get; set; }
-
     }
 }

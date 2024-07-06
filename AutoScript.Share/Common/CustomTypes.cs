@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,11 +28,11 @@ namespace AutoScript.Share
         public int Dir = 0;
         public string PicName = "";
         public (Int32 x, Int32 y, bool isFinded) Result = (-1, -1, false);
-       
+        public DetectMode DetectMode { get; set; } = DetectMode.FindMultiColor;
         public static List<ImageInfo> AllImageInfos = new List<ImageInfo>();
         public static List<ImageInfo> Reload()
         {
-            DataTable result = Utility.LoadFileData("ImageInfos.txt");
+            DataTable result = Utility.LoadFileData("Resource/ImageInfos.txt");
             if (AllImageInfos.Count > 0)
             {
                 return AllImageInfos;
@@ -131,6 +132,19 @@ namespace AutoScript.Share
         public int Index { get; set; }
         public string Script { get; set; }
         public int Hwnd {  get; set; }  
+    }
+    /// <summary>
+    /// 图色检测方式
+    /// </summary>
+    public enum DetectMode
+    {
+        Default = 0,
+        FindImage = 1,         //找图
+        FindMultiColor = 2,  //多点找色
+        FindColor = 3,          //找色
+        Template = 4,       //模板匹配（OpenCV）
+        ImageClassification = 5,          //图片分类（ML）
+        OCR = 6,     //飞桨OCR
     }
     /// <summary>
     /// 传递消息用的委托

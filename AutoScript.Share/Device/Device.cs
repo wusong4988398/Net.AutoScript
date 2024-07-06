@@ -9,7 +9,7 @@ namespace AutoScript.Share
     public abstract class Device : IDevice
     {
         private static List<IDevice> AllDevices = new List<IDevice>();
-       
+
 
         public static List<IDevice> GetAllDevices()
         {

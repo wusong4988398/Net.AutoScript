@@ -1,4 +1,9 @@
 using AutoScript.Share;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Security.Policy;
+using System.Xml.Linq;
 
 namespace AutoScript.Server
 {
@@ -8,9 +13,12 @@ namespace AutoScript.Server
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
+            builder.Services.AddScoped<IDevice, DevicePC>();
+            builder.Build();
 
             // 免注册调用大漠插件
             //var registerDmSoftDllResult = RegisterDmSoft.RegisterDmSoftDll();

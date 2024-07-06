@@ -19,6 +19,7 @@ namespace AutoScript.Share
             object x, y;
             if (info.PicName == "")
             {
+             
                 //没有图片名字的时候,是找色
                 dm.FindMultiColor(info.Range.x1, info.Range.y1, info.Range.x2, info.Range.y2, info.Color,
                     info.Offset_color, info.Sim, info.Dir, out  x, out  y);

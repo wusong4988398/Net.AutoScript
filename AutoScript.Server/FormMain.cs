@@ -100,6 +100,8 @@ namespace AutoScript.Server
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            //重新读取图色资源
+            ImageInfo.Reload();
             List<Account> secList = new List<Account>();
             List<Account> accounts = (List<Account>)dgvList.DataSource;
             foreach (DataGridViewRow row in dgvList.SelectedRows)

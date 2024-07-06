@@ -33,6 +33,7 @@ namespace AutoScript.Share
                 Config.AppConfig.Config_DM.Mode);
             dm.SetPath( Config.AppConfig.Config_DM.Path);
             dm.SetWindowSize(this.Device.Hwnd, 650, 500);
+            //dm.SetDict(0, "关闭.txt");
             //dm.EnableRealKeypad(1);
             //dm.SetKeypadDelay("normal", 30);
             //根据配置文件创建实现各个接口的对象,也可以直接new
@@ -96,6 +97,7 @@ namespace AutoScript.Share
                 {
                     return ret;
                 }
+                Thread.Sleep(500);
             }
         }
         public void Intercept()

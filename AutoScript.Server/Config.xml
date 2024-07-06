@@ -10,7 +10,7 @@
 		<property name="Mouse" value="windows"/>
 		<property name="KeyBorad" value="windows"/>
 		<property name="Mode" value="0"/>
-		<property name="Path" value="pic"/>
+		<property name="Path" value="Resource\pic"/>
 	</object>
 	<!--<object name="GameWindow" type="AutoScript.Share.Config_GameWindow, AutoScript.Share">
 		<property name="MemProcessName" value="Ld9BoxHeadless"/>
