@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 namespace AutoScript.Share
 {
-    public class Utility
+    public static class Utility
     {
         private static object CMDLocker = new object();
         public static List<string> ExecCMD(string cmd, string ExeFile = "cmd.exe")
@@ -106,6 +108,160 @@ namespace AutoScript.Share
             }
             da.Dispose();
             return result;
+        }
+
+        /// <summary>
+        /// Bitmap转化为Base64
+        /// </summary>
+        /// <param name="bitmap"></param>
+        /// <returns></returns>
+        public static string ConvertToBase64(this Bitmap bitmap)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                // 将Bitmap保存到MemoryStream中
+                bitmap.Save(memoryStream, bitmap.RawFormat);
+                // 将MemoryStream转换为字节数组
+                byte[] imageBytes = memoryStream.ToArray();
+                // 将字节数组转换为Base64字符串
+                string base64String = Convert.ToBase64String(imageBytes);
+                return base64String;
+            }
+        }
+
+        public static string ImgToBase64String(Bitmap bmp)
+        {
+            try
+            {
+                MemoryStream ms = new MemoryStream();
+                bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                byte[] arr = new byte[ms.Length];
+                ms.Position = 0;
+                ms.Read(arr, 0, (int)ms.Length);
+                ms.Close();
+                return Convert.ToBase64String(arr);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+
+
+        public static string SendPost(string url, IDictionary<string, string> parameters, IDictionary<String, String> headers, String json)
+        {
+            if (parameters != null && parameters.Count > 0)
+            {
+                if (url.Contains("?"))
+                {
+                    url = url + "&" + BuildQuery(parameters);
+                }
+                else
+                {
+                    url = url + "?" + BuildQuery(parameters);
+                }
+            }
+
+            HttpWebRequest req = GetWebRequest(url, "POST");
+            req.ContentType = "application/json;charset=utf-8";
+
+
+            if (headers != null)
+            {
+                foreach (var item in headers)
+                {
+                    req.Headers.Add(item.Key, item.Value);
+                }
+
+
+            }
+
+
+            byte[] postData = Encoding.UTF8.GetBytes(json);
+            System.IO.Stream reqStream = req.GetRequestStream();
+            reqStream.Write(postData, 0, postData.Length);
+            reqStream.Close();
+
+            HttpWebResponse rsp = (HttpWebResponse)req.GetResponse();
+            return GetResponseAsString(rsp, Encoding.UTF8);
+        }
+        private static HttpWebRequest GetWebRequest(string url, string method)
+        {
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+            req.ServicePoint.Expect100Continue = false;
+            req.Method = method;
+            req.KeepAlive = true;
+            req.UserAgent = "SEASHOP";
+            req.Timeout = 300000;
+            return req;
+        }
+        /// <summary>
+        /// 把响应流转换为文本。
+        /// </summary>
+        /// <param name="rsp">响应流对象</param>
+        /// <param name="encoding">编码方式</param>
+        /// <returns>响应文本</returns>
+        public static string GetResponseAsString(HttpWebResponse rsp, Encoding encoding)
+        {
+            StringBuilder result = new StringBuilder();
+            Stream stream = null;
+            StreamReader reader = null;
+
+            try
+            {
+                // 以字符流的方式读取HTTP响应
+                stream = rsp.GetResponseStream();
+                reader = new StreamReader(stream, encoding);
+
+                // 按字符读取并写入字符串缓冲
+                int ch = -1;
+                while ((ch = reader.Read()) > -1)
+                {
+                    // 过滤结束符
+                    char c = (char)ch;
+                    if (c != '\0')
+                    {
+                        result.Append(c);
+                    }
+                }
+            }
+            finally
+            {
+                // 释放资源
+                if (reader != null) reader.Close();
+                if (stream != null) stream.Close();
+                if (rsp != null) rsp.Close();
+            }
+
+            return result.ToString();
+        }
+        public static string BuildQuery(IDictionary<string, string> parameters)
+        {
+            StringBuilder postData = new StringBuilder();
+            bool hasParam = false;
+
+            IEnumerator<KeyValuePair<string, string>> dem = parameters.GetEnumerator();
+            while (dem.MoveNext())
+            {
+                string name = dem.Current.Key;
+                string value = dem.Current.Value;
+                // 忽略参数名或参数值为空的参数
+                if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(value))
+                {
+                    if (hasParam)
+                    {
+                        postData.Append("&");
+                    }
+
+                    postData.Append(name);
+                    postData.Append("=");
+                    postData.Append(HttpUtility.UrlEncode(value, Encoding.UTF8));
+                    hasParam = true;
+                }
+            }
+
+            return postData.ToString();
         }
     }
 }

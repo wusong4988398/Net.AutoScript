@@ -21,12 +21,12 @@ namespace AutoScript.Server
             this._currentOperation = "登录操作中";
 
             //this.deviceHandler.找屏动作(new List<string> { "自动匹配" }, new ActionParam());
-            this.deviceHandler.找屏动作(new List<string> { "听听无妨" }, new ActionParam());
+            //this.deviceHandler.找屏动作(new List<string> { "购买物品" }, new ActionParam());
             
             ActionParam param = new ActionParam() { delay=100};  //动作参数对象
 
             //this.deviceHandler.找屏动作(new List<string> { "便捷组队","自动匹配"}, param, new List<string> { "取消匹配" }, null);
-            //this.deviceHandler.找屏动作(new List<string> { "小关闭", "大关闭","中关闭","大关闭2", "大关闭_排行榜", "大关闭_我的好友", "关闭_大地图", "右下角_使用" }, param, new List<string> { "取消匹配" }, null);
+            this.deviceHandler.找屏动作(new List<string> { "小关闭", "大关闭","中关闭","大关闭2", "大关闭_排行榜", "大关闭_我的好友", "关闭_大地图", "右下角_使用" }, param, new List<string> { "取消匹配" }, null);
 
             // this.deviceHandler.点击(new ActionParam { Point = (595, 28),delay=500 });
 

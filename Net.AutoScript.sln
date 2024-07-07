@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoScript.ExtraServer", "AutoScript.ExtraServer\AutoScript.ExtraServer.csproj", "{86F0CCA3-632F-4B18-9610-314F985BA649}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,14 @@ Global
 		{67FE79AC-B3C6-4383-8B03-E86E8FAF3395}.Release|Any CPU.Build.0 = Release|Any CPU
 		{67FE79AC-B3C6-4383-8B03-E86E8FAF3395}.Release|x86.ActiveCfg = Release|Any CPU
 		{67FE79AC-B3C6-4383-8B03-E86E8FAF3395}.Release|x86.Build.0 = Release|Any CPU
+		{86F0CCA3-632F-4B18-9610-314F985BA649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F0CCA3-632F-4B18-9610-314F985BA649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F0CCA3-632F-4B18-9610-314F985BA649}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{86F0CCA3-632F-4B18-9610-314F985BA649}.Debug|x86.Build.0 = Debug|Any CPU
+		{86F0CCA3-632F-4B18-9610-314F985BA649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F0CCA3-632F-4B18-9610-314F985BA649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F0CCA3-632F-4B18-9610-314F985BA649}.Release|x86.ActiveCfg = Release|Any CPU
+		{86F0CCA3-632F-4B18-9610-314F985BA649}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

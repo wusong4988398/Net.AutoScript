@@ -158,7 +158,8 @@ namespace AutoScript.Share
         [DllImport("user32.dll")]
         public static extern bool GetWindowRect(IntPtr hWnd, ref RECT rect);
 
-
+        [DllImport("user32.dll")]
+        public static extern bool GetClientRect(IntPtr hWnd, ref RECT rect);
         // 热键
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int modifiers, Keys vk);

@@ -25,7 +25,7 @@ namespace AutoScript.Share
                     info.Offset_color, info.Sim, info.Dir, out  x, out  y);
             }
             else
-            {
+            {   
                 dm.FindPic(info.Range.x1, info.Range.y1, info.Range.x2, info.Range.y2, info.PicName + ".bmp",
                     info.Offset_color, info.Sim, info.Dir, out  x, out  y);
             }
