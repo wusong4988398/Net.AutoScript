@@ -494,6 +494,20 @@ namespace AutoScript.Share
             string[] colors = (colorStr + "-000000").Split('-');
             return (Color.FromArgb(Convert.ToInt32("FF" + colors[0], 16)), Color.FromArgb(Convert.ToInt32("FF" + colors[1], 16)));
         }
+
+
+        public unsafe ImageInfo OCR(ImageInfo info)
+        {
+            Bitmap S_bmp = 截屏(info.Range.x1, info.Range.y1, info.Range.x2, info.Range.y2);
+
+            (string text,Point point) ret=OCRHelper.Detect(S_bmp, info);
+            info.Result.x = ret.point.X;
+            info.Result.y = ret.point.Y;
+            info.Result.isFinded = ret.point.X>=0;
+            return info;
+                
+        }
+
         /// <summary>
         /// 多点找色
         /// </summary>
@@ -576,10 +590,16 @@ namespace AutoScript.Share
                 //找图
                 return this.FindPic(info);
             }
+            else if(!string.IsNullOrEmpty(info.ContainText))
+            {
+                //OCR
+                return OCR(info);
+            }
             else
             {
                 //多点找色
                 return FindMultiColor(info);
+
             }
         }
     }

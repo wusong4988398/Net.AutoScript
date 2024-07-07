@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoScript.Share", "AutoScr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoScript.Server", "AutoScript.Server\AutoScript.Server.csproj", "{A81243E3-0F1E-42F9-8E0C-7771E9EE6B93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoScript.Client", "AutoScript.Client\AutoScript.Client.csproj", "{67FE79AC-B3C6-4383-8B03-E86E8FAF3395}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoScript.Client", "AutoScript.Client\AutoScript.Client.csproj", "{67FE79AC-B3C6-4383-8B03-E86E8FAF3395}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4F4DA552-958E-4F0A-AD82-D68C71308421}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

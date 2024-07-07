@@ -17,8 +17,10 @@ namespace AutoScript.Server
         {
             HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
-            builder.Services.AddScoped<IDevice, DevicePC>();
-            builder.Build();
+            //builder.Services.AddScoped<IDevice, DevicePC>();
+            //builder.Build();
+
+            
 
             // 免注册调用大漠插件
             //var registerDmSoftDllResult = RegisterDmSoft.RegisterDmSoftDll();

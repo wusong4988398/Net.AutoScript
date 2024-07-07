@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -29,6 +30,7 @@ namespace AutoScript.Share
         public string PicName = "";
         public (Int32 x, Int32 y, bool isFinded) Result = (-1, -1, false);
         public DetectMode DetectMode { get; set; } = DetectMode.FindMultiColor;
+        public Bitmap? Pic { get; set; }
         public static List<ImageInfo> AllImageInfos = new List<ImageInfo>();
         public static List<ImageInfo> Reload()
         {
@@ -49,6 +51,7 @@ namespace AutoScript.Share
                     Offset = (GetIntVal(row["offsetX"]), GetIntVal(row["offsetY"])),
                     Sim = double.Parse(row["sim"]?.ToString()),
                     Color = row["color"]?.ToString(),
+                    ContainText= row["containText"]?.ToString(),
                     Offset_color = row["offsetColor"]?.ToString()
                 };
                 AllImageInfos.Add(info);
@@ -67,6 +70,14 @@ namespace AutoScript.Share
             }
             return ret;
         }
+        /// <summary>
+        /// Ocr识别后的文字
+        /// </summary>
+        public string OcrString { get; set; } = "";
+        /// <summary>
+        /// 希望包含的文字
+        /// </summary>
+        public string ContainText { get; set; } = "";
 
 
     }

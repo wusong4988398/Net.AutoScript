@@ -1,0 +1,4 @@
+﻿[*.{cs,vb}]
+
+# IDE0048: Add parentheses for clarity
+dotnet_diagnostic.IDE0048.severity = none
