@@ -25,7 +25,7 @@ namespace AutoScript.Server
 
             AllAccounts.Clear();
 
-            DataTable dt = Utility.LoadFileData(fileName);
+            DataTable dt = Utility.LoadFileData(fileName, Encoding.UTF8);
             int i = 0;
             foreach (DataRow r in dt.Rows)
             {

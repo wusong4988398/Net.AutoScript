@@ -34,7 +34,7 @@ namespace AutoScript.Share
         public static List<ImageInfo> AllImageInfos = new List<ImageInfo>();
         public static List<ImageInfo> Reload()
         {
-            DataTable result = Utility.LoadFileData("Resource/ImageInfos.txt");
+            DataTable result = Utility.LoadFileData("Resource/ImageInfos.txt", Encoding.UTF8);
             if (AllImageInfos.Count > 0)
             {
                 return AllImageInfos;

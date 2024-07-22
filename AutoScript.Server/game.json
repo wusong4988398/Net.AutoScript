@@ -1,0 +1,7 @@
+{
+  "game": "如果的世界",
+  "scriptname": "如果的世界练级脚本1.0",
+  "scriptid": "如果的世界练级脚本1.0",
+  "huburl": "http://localhost:5103/RemoteHub",
+  "ldprocess": "LdBoxHeadless.exe"
+}

@@ -1,0 +1,1 @@
+Regsvr32 D:\gamescript\CSharpScript\AutoScript.Server\Resource\lib\TSPlug.dll

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,11 @@ namespace AutoScript.Server
 {
     public class TeamController : ControllerBase
     {
+        public TeamController(HubConnection connection) : base(connection)
+        {
+
+        }
+
         public override void Start(Account account)
         {
             throw new NotImplementedException();

@@ -3,12 +3,22 @@
 
 	<object name="Config" type="AutoScript.Share.Config, AutoScript.Share">
 		<property name="Config_DM" ref="Config_DM"/>
+		<property name="Config_AJ" ref="Config_AJ"/>
 		<property name="Config_GameWindow" ref="GameWindow"/>
+		<property name="PlugeName" value="DM"/>
 	</object>
 	<object name="Config_DM" type="AutoScript.Share.Config_DM, AutoScript.Share">
 		<property name="Display" value="gdi"/>
 		<property name="Mouse" value="windows"/>
 		<property name="KeyBorad" value="windows"/>
+		<property name="Mode" value="0"/>
+		<property name="Path" value="Resource\pic"/>
+	</object>
+	<object name="Config_AJ" type="AutoScript.Share.Config_AJ, AutoScript.Share">
+		<property name="Display" value="GDI"/>
+		<property name="Mouse" value="WM"/>
+		<property name="KeyBorad" value="WM"/>
+		<property name="Flag" value="LS"/>
 		<property name="Mode" value="0"/>
 		<property name="Path" value="Resource\pic"/>
 	</object>
@@ -36,8 +46,8 @@
 	<object name="ScriptExecutor" type="AutoScript.Server.梦幻西游, AutoScript.Server" singleton="false"></object>
 	<!--脚本辅助对象-->
 	<object name="GameHelper" type="AutoScript.Server.GameHelper, AutoScript.Server" singleton="false"></object>
-	<!--单人任务控制器对象-->
+	<!--单人任务控制器对象--><!--
 	<object name="SingleController" type="AutoScript.Server.SingleController, AutoScript.Server"></object>
-	<!--组队任务控制器对象-->
-	<object name="TeamController" type="AutoScript.Server.TeamController, AutoScript.Server"></object>
+	--><!--组队任务控制器对象--><!--
+	<object name="TeamController" type="AutoScript.Server.TeamController, AutoScript.Server"></object>-->
 </objects>

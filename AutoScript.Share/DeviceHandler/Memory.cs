@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,13 @@ namespace AutoScript.Share
         {
             this.device = device;
         }
-        public void ReadMemValue()
+        public async Task<T> ReadMemoryByFeatureCode<T>(string search) where T : struct
         {
-            throw new NotImplementedException();
+            
+            T value= await device.Connection.InvokeAsync<T>("ReadMemoryByFeatureCode", this.device.Pid,search);
+
+            return value;
+            
         }
 
         public void WriteMemValue()

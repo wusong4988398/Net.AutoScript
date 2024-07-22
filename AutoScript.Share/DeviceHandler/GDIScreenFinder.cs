@@ -520,21 +520,29 @@ namespace AutoScript.Share
             OcrResult ocrResult = JsonConvert.DeserializeObject<OcrResult>(result);
             foreach (var item in ocrResult.Data)
             {
-                if (item.Score> info.Sim&&item.Text.Contains(info.ContainText))
+                if (item.Score> info.Sim&&!string.IsNullOrEmpty(info.ContainText) &&item.Text.Contains(info.ContainText))
                 {
                     int x = item.Box[0][0] + info.Range.x1;
                     int y = item.Box[0][1] + info.Range.y1;
                     info.Result.x = x;
                     info.Result.y = y;
                     info.Result.isFinded = true;
+                    break;
+                    //info.OcrString = item.Text;
+                }else if(item.Score> info.Sim &&string.IsNullOrEmpty(info.ContainText))
+                {
+                    int x = item.Box[0][0] + info.Range.x1;
+                    int y = item.Box[0][1] + info.Range.y1;
+                    info.Result.x = x;
+                    info.Result.y = y;
+                    info.Result.isFinded = true;
+                    info.OcrString = item.Text;
+                    break;
+
                 }
             }
             sw.Stop();
             Trace.WriteLine("OCR耗时:" + sw.ElapsedMilliseconds.ToString() + "毫秒");
-
-
-
-
             //(string text,Point point) ret=OCRHelper.Detect(S_bmp, info);
             //info.Result.x = ret.point.X;
             //info.Result.y = ret.point.Y;
@@ -620,22 +628,25 @@ namespace AutoScript.Share
         /// <returns></returns>
         public ImageInfo 找屏(ImageInfo info)
         {
+            info.Result = (-1, -1, false);
             if (info.PicName.Length > 0)
             {
                 //找图
                 return this.FindPic(info);
             }
-            else if(!string.IsNullOrEmpty(info.ContainText))
-            {
-                //OCR
-                return OCR(info);
-            }
-            else
+           
+            else if(info.Offset_color!= "000000")
             {
                 //多点找色
                 return FindMultiColor(info);
 
             }
+            else
+            {
+                //OCR
+                return OCR(info);
+            }
+
         }
     }
 }

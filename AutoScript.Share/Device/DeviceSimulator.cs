@@ -8,10 +8,12 @@ namespace AutoScript.Share
 {
     public class DeviceSimulator : Device
     {
+     
         public DeviceSimulator(int pid)
         {
             GetDeviceInfo(pid);
         }
+
         protected override void GetDeviceInfo(int pid)
         {
             //将内存进程列表和窗口进程列表排序,就得到对应关系

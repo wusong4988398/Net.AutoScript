@@ -1,4 +1,6 @@
 ﻿using AutoScript.Share;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Spring.Util;
 using System;
 using System.Collections.Generic;
@@ -18,13 +20,21 @@ namespace AutoScript.Server
         {
             InitializeComponent();
         }
+        private IHost _host;
+        private IController singleController;
+        public FormMain(IHost host):this()
+        {
+            this._host=host;
+            singleController = this._host.Services.GetRequiredService<SingleController>();
+        }
 
 
 
 
         private object locker = new object();
-        private IController singleController = (IController)Config.applicationContext.GetObject("SingleController");
-        private IController teamController = (IController)Config.applicationContext.GetObject("TeamController");
+        //private IController singleController = (IController)Config.applicationContext.GetObject("SingleController");
+
+       // private IController teamController = (IController)Config.applicationContext.GetObject("TeamController");
         private void BtnImport_Click(object sender, EventArgs e)
         {
             this.openFileDialog.Filter = "文本文件|*.txt|所有文件|*.*";

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
+using System.Diagnostics;
 namespace AutoScript.Share
 {
     public struct EmumInfo
@@ -184,6 +184,8 @@ namespace AutoScript.Share
         [DllImport("kernel32")]
         public static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
 
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
         //----------------INI文件读写 End-------------------//
 
         //----------------------内存读写 START-----------------------//
@@ -195,6 +197,8 @@ namespace AutoScript.Share
         public static extern Int32 WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, UInt32 nSize, IntPtr lpNumberOfBytesWritten);
         [DllImport("kernel32.dll")]
         public static extern Int32 ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, UInt32 nSize, IntPtr lpNumberOfBytesRead);
+        [DllImport("kernel32.dll")]
+        public static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesRead);
 
         [DllImport("kernel32.dll ")]
         public static extern bool CloseHandle(int hProcess);
@@ -320,7 +324,7 @@ namespace AutoScript.Share
             BaseAddress = new IntPtr(BaseAddress.ToInt32() + index + fCode.Offset);
             return new IntPtr(0);
         }
-
+  
         public static IntPtr GetAddressByFeatureCode(int pid, string featureCode, int offset, IntPtr startAddr, IntPtr endAddr)
         {
             if (pid <= 0)
@@ -351,7 +355,50 @@ namespace AutoScript.Share
             }
             return (IntPtr)baseAddr;
         }
-        public static IntPtr GetAddressByFeatureCode(int pid, byte[] featureCode, int offset, IntPtr startAddr, IntPtr endAddr)
+        const int PROCESS_WM_READ = 0x0010;
+        public static void GetAddressByFeatureCode2(int pid)
+        {
+            // 获取目标进程
+            Process process = Process.GetProcessById(pid);
+            IntPtr processHandle = OpenProcess(PROCESS_WM_READ, false, process.Id);
+
+            // 定义要搜索的特征码
+            byte[] pattern = new byte[] { 0xC0, 0x72, 0xFF, 0x05, 0x4B, 0x02, 0x00, 0x00 };
+
+            // 定义读取内存的缓冲区
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+
+            // 遍历进程的内存
+            for (IntPtr address = IntPtr.Zero; address.ToInt64() < 0x7fffffff; address = IntPtr.Add(address, buffer.Length))
+            {
+                if (ReadProcessMemory(processHandle, address, buffer, buffer.Length, out bytesRead))
+                {
+                    // 在缓冲区中搜索特征码
+                    for (int i = 0; i < bytesRead - pattern.Length; i++)
+                    {
+                        bool found = true;
+                        for (int j = 0; j < pattern.Length; j++)
+                        {
+                            if (buffer[i + j] != pattern[j])
+                            {
+                                found = false;
+                                break;
+                            }
+                        }
+
+                        if (found)
+                        {
+                            Console.WriteLine($"Pattern found at address: 0x{address.ToInt64() + i:X}");
+                        }
+                    }
+                }
+            }
+
+            CloseHandle(processHandle);
+        }
+
+        public static IntPtr GetAddressByFeatureCode(int pid, byte[] featureCode, long offset, IntPtr startAddr, IntPtr endAddr)
         {
             if (pid <= 0)
             {

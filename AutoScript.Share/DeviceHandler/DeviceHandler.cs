@@ -1,5 +1,8 @@
-﻿using System;
+﻿using AoJiaLib;
+using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +16,7 @@ namespace AutoScript.Share
     {
         public IDevice Device { get ; set ; }
         public Dm.dmsoft dm;
+        public AoJiaD aj;
         private IDeviceInput deviceInput;
         private IDeviceScreen deviceScreen;
         private IDeviceMemory deviceMemory;
@@ -21,28 +25,57 @@ namespace AutoScript.Share
 
         public CheckPauseCallBack PauseCallBack { get; set; }
 
-        public DeviceHandler(IDevice device)
+        public DeviceHandler(IDevice device, HubConnection connection)
         {
+            device.Connection = connection;
             this.Device = device;
+
             //根据配置文件绑定大漠对象到设备
-            dm = new Dm.dmsoft();
-            dm.BindWindow(device.Hwnd,
-                Config.AppConfig.Config_DM.Display,
-                Config.AppConfig.Config_DM.Mouse,
-                Config.AppConfig.Config_DM.KeyBorad,
-                Config.AppConfig.Config_DM.Mode);
-            dm.SetPath( Config.AppConfig.Config_DM.Path);
-            dm.SetWindowSize(this.Device.Hwnd, 650, 500);
+
+
+
+
+
             //dm.SetDict(0, "关闭.txt");
             //dm.EnableRealKeypad(1);
             //dm.SetKeypadDelay("normal", 30);
             //根据配置文件创建实现各个接口的对象,也可以直接new
             //deviceInput = (IDeviceInput)Config.applicationContext.GetObject("DeviceInput", new object[] { device});
+            if (Config.AppConfig.PlugeName == "AJ")//aj插件
+            {
+                aj = new AoJiaD();
+                aj.KQHouTai(device.Hwnd,
+                    Config.AppConfig.Config_AJ.Display,
+                    Config.AppConfig.Config_AJ.Mouse,
+                    Config.AppConfig.Config_AJ.KeyBorad,
+                    Config.AppConfig.Config_AJ.Flag,
+                    Config.AppConfig.Config_AJ.Mode);
+                aj.SetPath(Config.AppConfig.Config_AJ.Path);
+                aj.SetWindowSize(this.Device.Hwnd, 650, 500);
+                deviceInput = new AJInput(device, aj);
+                deviceScreen = new DeviceScreenAj(device, aj);
 
+           
+            }
+            else if(Config.AppConfig.PlugeName == "DM")
+            {
+                dm = new Dm.dmsoft();
+                dm.BindWindow(device.Hwnd,
+                    Config.AppConfig.Config_DM.Display,
+                    Config.AppConfig.Config_DM.Mouse,
+                    Config.AppConfig.Config_DM.KeyBorad,
+                    Config.AppConfig.Config_DM.Mode);
+                dm.SetPath(Config.AppConfig.Config_DM.Path);
+                dm.SetWindowSize(this.Device.Hwnd, 650, 500);
+                deviceInput = new DmInput(device, dm);
+                deviceScreen = new DeviceScreenDm(device, dm);
+                //dm.SetMemoryHwndAsProcessId(1);
+               //var result = dm.FindDataEx(42412, "0000000000000000-00007fffffffffff", "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 ?? ?? 00 00 ?? ?? 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ?? ?? 00 00 ?? ?? 00 00 00 3F 00 00 00 3F 01 00 00 00 00 00 ?? 42 00 00 ?? 42 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 ?? ?? 43 00 00 DC 42 00 00 00 00 00 00 80 3F 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 01 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 FE FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 ?? ?? ?? ?? ?? ?? 00 00 FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0F 00 00 00 00 00 00 00", 4, 1, 0);
+                //Trace.WriteLine(result);
 
-            deviceInput = new DmInput(device,dm);
-            //deviceScreen = new DeviceScreenDm(device, dm);
-            deviceScreen = new GDIScreenFinder(new IntPtr(device.Hwnd));
+            }
+            //
+            //deviceScreen = new GDIScreenFinder(new IntPtr(device.Hwnd));
             deviceMemory = new Memory(device);
             devicePacket = new Packet (device);
         }
@@ -106,9 +139,10 @@ namespace AutoScript.Share
             devicePacket.Intercept();
         }
 
-        public void ReadMemValue()
+        public async Task<T> ReadMemoryByFeatureCode<T>(string search) where T : struct
         {
-            throw new NotImplementedException();
+            return await this.deviceMemory.ReadMemoryByFeatureCode<T>(search);
+           
         }
 
         public void Recv()

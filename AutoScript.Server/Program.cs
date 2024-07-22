@@ -1,9 +1,12 @@
 using AutoScript.Share;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Security.Policy;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.Configuration;
+using System.Data.Common;
+
 
 namespace AutoScript.Server
 {
@@ -15,12 +18,42 @@ namespace AutoScript.Server
         [STAThread]
         static void Main(string[] args)
         {
-            HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+           // HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+            IHostBuilder builder = Host.CreateDefaultBuilder();
+
+            builder.ConfigureHostConfiguration(config =>
+            {
+                config.AddJsonFile("game.json");//添加配置文件
+            });
+
+            //注册连接对象到容器
+            builder.ConfigureServices((context, services) =>
+            {
+                var connection = new HubConnectionBuilder()
+                                .WithUrl(context.Configuration["huburl"]!)
+                                .WithAutomaticReconnect()
+                                .Build();
+                connection.ConfigureAwait(true);
+                //自动重连设定
+                connection.Closed += async (error) =>
+                {
+                    await Task.Delay(3 * 1000);
+                    await connection.StartAsync();
+                };
+                connection.StartAsync().Wait();
+                services.AddSingleton<HubConnection>(connection);
+                services.AddScoped<SingleController>();
+            });
+            IHost host= builder.Start();
+
+
+            //service.AddScoped<ScriptController>();
+
 
             //builder.Services.AddScoped<IDevice, DevicePC>();
             //builder.Build();
 
-            
+
 
             // 免注册调用大漠插件
             //var registerDmSoftDllResult = RegisterDmSoft.RegisterDmSoftDll();
@@ -50,7 +83,7 @@ namespace AutoScript.Server
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Application.Run(new Form1());
-            Application.Run(new FormMain());
+            Application.Run(new FormMain(host));
         }
     }
 

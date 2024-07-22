@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,6 +11,10 @@ namespace AutoScript.Server
 {
     public class SingleController:ControllerBase
     {
+        public SingleController(HubConnection connection) : base(connection)
+        {
+
+        }
 
         public override async void Start()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -38,6 +39,8 @@ namespace AutoScript.Share
         public int Pid { get; set; }
         public string Port { get; set; }
         public string IP { get; set; }
+        public HubConnection Connection {get; set; }
+
         protected virtual void GetDeviceInfo(int pid)
         {
             return;

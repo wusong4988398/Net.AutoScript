@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 namespace AutoScript.Share
@@ -87,8 +88,41 @@ namespace AutoScript.Share
                 return ex.Message;
             }
         }
-        public static DataTable LoadFileData(string fileName)
+        public static DataTable LoadFileData(string fileName, Encoding encoding)
         {
+            //DataTable dataTable = new DataTable();
+            //try
+            //{
+            //    using (StreamReader reader = new StreamReader(fileName, encoding))
+            //    {
+            //        // 读取第一行作为列名
+            //        string[] headers = reader.ReadLine().Split(',');
+            //        foreach (string header in headers)
+            //        {
+            //            dataTable.Columns.Add(header);
+            //        }
+
+            //        // 逐行读取数据
+            //        while (!reader.EndOfStream)
+            //        {
+            //            //string[] rows = reader.ReadLine().Split(',');
+            //            string[] rows = Regex.Split(reader.ReadLine(), @",(?=(?:[^\""]|\""[^\""]*\"")*$)");
+            //            DataRow dataRow = dataTable.NewRow();
+            //            for (int i = 0; i < headers.Length; i++)
+            //            {
+            //                dataRow[i] = rows[i].Replace("\"", "");
+            //            }
+            //            dataTable.Rows.Add(dataRow);
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("Error reading file: " + ex.Message);
+            //}
+            //return dataTable;
+
+
             FileInfo file = new FileInfo(fileName);
             string dataSource, tableName, connectionString, strCmd;
             dataSource = file.DirectoryName;
@@ -262,6 +296,95 @@ namespace AutoScript.Share
             }
 
             return postData.ToString();
+        }
+
+
+        /// <summary>
+        /// 转整形
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static int ToInt(this object thisValue)
+        {
+            int reval = 0;
+            if (thisValue == null)
+            {
+                return 0;
+            }
+
+            if (thisValue != DBNull.Value && int.TryParse(thisValue.ToString(), out reval))
+            {
+                return reval;
+            }
+
+            return reval;
+        }
+
+        /// <summary>
+        /// 转整形
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static long ToInt64(this object thisValue)
+        {
+            long reval = 0;
+            if (thisValue == null)
+            {
+                return 0;
+            }
+
+            if (thisValue != DBNull.Value && Int64.TryParse(thisValue.ToString(), out reval))
+            {
+                return reval;
+            }
+
+            return reval;
+        }
+
+
+
+        /// <summary>
+        /// 转数字
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static decimal ToDecimal(this object thisValue)
+        {
+            if (thisValue != null && thisValue != DBNull.Value &&
+                decimal.TryParse(thisValue.ToString(), out decimal reval))
+            {
+                return reval;
+            }
+
+
+            return 0;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static double ToDouble(this object thisValue)
+        {
+            if (thisValue != null && thisValue != DBNull.Value &&
+                double.TryParse(thisValue.ToString(), out double reval))
+            {
+                return reval;
+            }
+
+
+            return 0;
+        }
+
+
+        /// <summary>
+        /// 转非空字符串
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string ToNullString(this object obj)
+        {
+            return (((obj == null) && (obj != DBNull.Value)) ? string.Empty : obj.ToString().Trim());
         }
     }
 }
