@@ -41,6 +41,12 @@ namespace AutoScript.Server
                     await connection.StartAsync();
                 };
                 connection.StartAsync().Wait();
+                //services.AddScoped<Func<int, Device>>(provider => pid =>
+                //{
+                //    return new DevicePC(pid);
+                //});
+
+
                 services.AddSingleton<HubConnection>(connection);
                 services.AddScoped<SingleController>();
             });

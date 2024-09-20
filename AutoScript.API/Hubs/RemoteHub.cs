@@ -20,12 +20,12 @@ namespace AutoScript.API.Hubs
         }
 
         
-        public async Task<T?> ReadMemoryByFeatureCode<T>(int pid, string search)
+        public async Task<string> ReadMemoryByFeatureCode(int pid, string search)
         {
             IEnumerable<long> AoBScanResults = await AoBScan(pid,search, true, true);
-            if (!AoBScanResults.Any()) return default;
+            if (!AoBScanResults.Any()) return "";
             string realAddress = Convert.ToString(AoBScanResults.FirstOrDefault(), 16);
-            T value =_memLib.ReadMemory<T>(realAddress);
+            string value =_memLib.ReadString(realAddress);
             return value;
 
         }

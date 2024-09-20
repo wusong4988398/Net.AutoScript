@@ -184,7 +184,7 @@
             txtScript.Name = "txtScript";
             txtScript.Size = new Size(161, 165);
             txtScript.TabIndex = 2;
-            txtScript.Text = "宝图\r\n师门\r\n登入\r\n登出";
+            txtScript.Text = "师门 \r\n宝图\r\n登入\r\n登出";
             txtScript.TextChanged += txtScript_TextChanged;
             // 
             // btnStart

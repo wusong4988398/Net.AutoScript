@@ -27,6 +27,7 @@ namespace AutoScript.Share
             {
                 return;
             }
+
             dm.MoveTo(param.Point.x, param.Point.y);
             Thread.Sleep(param.delay);
             dm.LeftClick();

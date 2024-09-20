@@ -16,7 +16,7 @@
         /// <typeparam name="T"></typeparam>
         /// <param name="search"></param>
         /// <returns></returns>
-        Task<T?> ReadMemoryByFeatureCode<T>(int pid, string search);
+        Task<string> ReadMemoryByFeatureCode(int pid, string search);
        
     }
 }

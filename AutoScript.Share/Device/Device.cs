@@ -30,7 +30,8 @@ namespace AutoScript.Share
             foreach (var p in ps)
             {
                 //根据配置文件指定的子类，创建设备对象
-                AllDevices.Add((IDevice)Config.applicationContext.GetObject("Device", new object[] { p.Id }));
+                //AllDevices.Add((IDevice)Config.applicationContext.GetObject("Device", new object[] { p.Id }));
+                AllDevices.Add(new DevicePC(p.Id));
             }
             return AllDevices;
         }

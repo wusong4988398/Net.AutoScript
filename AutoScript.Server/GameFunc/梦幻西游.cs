@@ -18,18 +18,18 @@ namespace AutoScript.Server
         private async void 挖宝图()
         {
 
-            double value= await this.deviceHandler.ReadMemoryByFeatureCode<double>("C5 8B 00 00 00 ?? ?? 40 03 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 05 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 01 00 00 00 ?? ?? 00 00 01 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? 00 00 00 00 00 00 00 00 00 C5 8B 00 00 00 00 ?? 40 03 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 05 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? ?? 00 00 00 00 00 00 00 00 C5 8B 00 00 00");
-            MemLib.OpenProcess(this.deviceHandler.Device.Pid);
+            //double value= await this.deviceHandler.ReadMemoryByFeatureCode<double>("C5 8B 00 00 00 ?? ?? 40 03 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 05 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 01 00 00 00 ?? ?? 00 00 01 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? 00 00 00 00 00 00 00 00 00 C5 8B 00 00 00 00 ?? 40 03 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 05 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? ?? 00 00 00 00 00 00 00 00 C5 8B 00 00 00");
+            //MemLib.OpenProcess(this.deviceHandler.Device.Pid);
             
-            //IEnumerable<long> AoBScanResults = MemLib.AoBScan(0x01000000, 0x04000000, "?? ?? ?? ?5 ?? ?? 5? 00 ?? 00 00 00 ?? 00 50 00", false, true).Result;
-            var speedAddr = MemLib.AoBScan("24 E9 39 74 34 15 F0 9C").Result;
-            //byte[] fd = API.StrToToHexByte("24 E9 39 74 34 15 F0 9C");
-            IntPtr addr = new IntPtr(0x10FFFFFF);
-            API.GetAddressByFeatureCode2(this.deviceHandler.Device.Pid);
-            addr = API.GetAddressByFeatureCode(this.deviceHandler.Device.Pid, new byte[] { 0x24, 0xE9, 0x39, 0x74, 0x34, 0x15, 0xF0, 0x9C }, 5, addr, new IntPtr(0x7FFFFFFF));
-            string strInfo = API.GetMemString(this.deviceHandler.Device.Pid, addr, 10, Encoding.UTF8);
-            int index_end = strInfo.IndexOf("\"");
-            strInfo = strInfo.Substring(0, index_end);
+            ////IEnumerable<long> AoBScanResults = MemLib.AoBScan(0x01000000, 0x04000000, "?? ?? ?? ?5 ?? ?? 5? 00 ?? 00 00 00 ?? 00 50 00", false, true).Result;
+            //var speedAddr = MemLib.AoBScan("24 E9 39 74 34 15 F0 9C").Result;
+            ////byte[] fd = API.StrToToHexByte("24 E9 39 74 34 15 F0 9C");
+            //IntPtr addr = new IntPtr(0x10FFFFFF);
+            //API.GetAddressByFeatureCode2(this.deviceHandler.Device.Pid);
+            //addr = API.GetAddressByFeatureCode(this.deviceHandler.Device.Pid, new byte[] { 0x24, 0xE9, 0x39, 0x74, 0x34, 0x15, 0xF0, 0x9C }, 5, addr, new IntPtr(0x7FFFFFFF));
+            //string strInfo = API.GetMemString(this.deviceHandler.Device.Pid, addr, 10, Encoding.UTF8);
+            //int index_end = strInfo.IndexOf("\"");
+            //strInfo = strInfo.Substring(0, index_end);
 
 
             this._currentOperation = "挖宝图";
@@ -72,17 +72,19 @@ namespace AutoScript.Server
             this.deviceHandler.找屏动作(["活动图标"], param, ["活动弹窗"], new ActionParam());
             ImageInfo info = this.deviceHandler.找屏动作(["师门任务"], new ActionParam());
             if (!info.Result.isFinded) return;
-            this.deviceHandler.找屏动作(["师门-去完成", "师门-继续任务", "请选择要做的事"], param, ["请选择要做的事", "师门-继续任务"], null);
+            //this.deviceHandler.找屏动作(["师门-去完成", "师门-继续任务", "请选择要做的事"], param, ["请选择要做的事", "师门-继续任务"], null);
             //this.deviceHandler.找屏动作(new List<string> {"请选择要做的事" }, param, new List<string> { "" }, null);
+            this.deviceHandler.找屏动作(["师门-去完成", "师门-继续任务", "请选择要做的事"], param);
             ImageInfo img = new ImageInfo();
             while (!StopCallBack())
             {
-                Thread.Sleep(100);
+                Thread.Sleep(500);
                 if (StopCallBack()) return;
-                this.deviceHandler.找屏动作(["请选择要做的事"], param);
-                this.deviceHandler.找屏动作(["上交"], param);
-                this.deviceHandler.找屏动作(["使用"], param);
-                this.deviceHandler.找屏动作(["侧边栏-师门"], new ActionParam { delay = 5000 });
+                ImageInfo img2=this.deviceHandler.找屏动作(["上交", "使用", "请选择要做的事"], param);
+                if (!img2.Result.isFinded)
+                {
+                    this.deviceHandler.找屏动作(["侧边栏-师门"], new ActionParam { delay = 500 });
+                }
                 ImageInfo img1 = this.deviceHandler.找屏动作(["购买"], null);
                 if (img1.Result.isFinded)
                 {

@@ -33,9 +33,6 @@ namespace AutoScript.Share
             //根据配置文件绑定大漠对象到设备
 
 
-
-
-
             //dm.SetDict(0, "关闭.txt");
             //dm.EnableRealKeypad(1);
             //dm.SetKeypadDelay("normal", 30);
@@ -92,6 +89,12 @@ namespace AutoScript.Share
             if (info.Result.isFinded && param != null)
             {
                 param.Point = (info.Result.x + info.Offset.x, info.Result.y + info.Offset.y);
+                if (param!=null&&param.ActionType== ActionType.Click)
+                {
+                    Trace.WriteLine($"执行{info.Name},点击坐标:{param.Point.x},{param.Point.y}");
+
+                }
+
                 点击(param);
                 发送字符串(param);
                 发送按键(param);
@@ -106,6 +109,8 @@ namespace AutoScript.Share
             ImageInfo ret = new ImageInfo();
             foreach (var info in infos)
             {
+                info.Result = (-1, -1, false);
+                
                 ret = 找屏动作(info, param);
                 if (ret.Result.isFinded)
                 {
