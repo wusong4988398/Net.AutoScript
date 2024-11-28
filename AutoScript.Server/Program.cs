@@ -18,15 +18,16 @@ namespace AutoScript.Server
         [STAThread]
         static void Main(string[] args)
         {
-           // HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+            //Class1.dmtest();return;
+            // HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
             IHostBuilder builder = Host.CreateDefaultBuilder();
 
             builder.ConfigureHostConfiguration(config =>
             {
-                config.AddJsonFile("game.json");//Ìí¼ÓÅäÖÃÎÄ¼þ
+                config.AddJsonFile("game.json");//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
             });
 
-            //×¢²áÁ¬½Ó¶ÔÏóµ½ÈÝÆ÷
+            //×¢ï¿½ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             builder.ConfigureServices((context, services) =>
             {
                 var connection = new HubConnectionBuilder()
@@ -34,7 +35,7 @@ namespace AutoScript.Server
                                 .WithAutomaticReconnect()
                                 .Build();
                 connection.ConfigureAwait(true);
-                //×Ô¶¯ÖØÁ¬Éè¶¨
+                //ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¶¨
                 connection.Closed += async (error) =>
                 {
                     await Task.Delay(3 * 1000);
@@ -61,21 +62,21 @@ namespace AutoScript.Server
 
 
 
-            // Ãâ×¢²áµ÷ÓÃ´óÄ®²å¼þ
+            // ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½Ã´ï¿½Ä®ï¿½ï¿½ï¿½
             //var registerDmSoftDllResult = RegisterDmSoft.RegisterDmSoftDll();
-            //Console.WriteLine($"Ãâ×¢²áµ÷ÓÃ´óÄ®²å¼þ·µ»Ø£º{registerDmSoftDllResult}");
+            //Console.WriteLine($"ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½Ã´ï¿½Ä®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½{registerDmSoftDllResult}");
             //if (!registerDmSoftDllResult)
             //{
-            //    throw new Exception("Ãâ×¢²áµ÷ÓÃ´óÄ®²å¼þÊ§°Ü");
+            //    throw new Exception("ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½Ã´ï¿½Ä®ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
             //}
             //Dmsoft m_dm = new Dmsoft();
 
-            //// ÊÕ·Ñ×¢²á
+            //// ï¿½Õ·ï¿½×¢ï¿½ï¿½
             //int dm_ret = m_dm.Reg(DmConfig.DmRegCode, DmConfig.DmVerInfo);
-            //Console.WriteLine($"ÊÕ·Ñ×¢²á·µ»Ø£º{dm_ret}");
+            //Console.WriteLine($"ï¿½Õ·ï¿½×¢ï¿½á·µï¿½Ø£ï¿½{dm_ret}");
             //if (dm_ret != 1)
             //{
-            //    throw new MyException("ÊÕ·Ñ×¢²áÊ§°Ü,·µ»ØÖµ:" + dm_ret.ToString());
+            //    throw new MyException("ï¿½Õ·ï¿½×¢ï¿½ï¿½Ê§ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Öµ:" + dm_ret.ToString());
             //}
 
             //GameScript gameScript = new GameScript();
@@ -126,8 +127,8 @@ public class GameScript
             while (!token.IsCancellationRequested)
             {
                 _currentOperation = "Executing main script tasks";
-                // ... Ö´ÐÐºËÐÄ½Å±¾ÈÎÎñ£¬Èç¸±±¾ÈÎÎñ¡¢Ö÷ÏßÈÎÎñµÈ
-                await Task.Delay(1000); // Ä£ÄâÈÎÎñÖ´ÐÐ
+                // ... Ö´ï¿½Ðºï¿½ï¿½Ä½Å±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç¸±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                await Task.Delay(1000); // Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½
             }
         }
 
@@ -135,9 +136,9 @@ public class GameScript
         {
             while (!token.IsCancellationRequested)
             {
-                // ¼ì²âÓÎÏ·´°¿ÚÊÇ·ñ¿¨ËÀ¡¢´°¿ÚÊÇ·ñ±ÀÀ£µÈ²Ù×÷
+                // ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½È²ï¿½ï¿½ï¿½
                 Console.WriteLine($"Monitoring... Current operation: {_currentOperation}");
-                await Task.Delay(500); // Ä£Äâ¼à¿Ø²Ù×÷
+                await Task.Delay(500); // Ä£ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½
             }
         }
     }

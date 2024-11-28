@@ -20,7 +20,21 @@ namespace AutoScript.Server
 
            return AllAccounts; 
         }
+        public static List<Account> Reload()
+        {
+            int i = 0;
+            List<IDevice> allDevices= Device.GetAllDevices();
+            foreach (var item in allDevices)
+            {
 
+                AllAccounts.Add(new Account() { Index = i++, UserName = "用户" + i++, Password = "888888"});
+                
+            }
+          
+
+            return AllAccounts;
+
+        }
         public static List<Account> Reload(string fileName) {
 
             AllAccounts.Clear();
@@ -32,8 +46,8 @@ namespace AutoScript.Server
                 Account account = new Account()
                 {
                     Index = i++,
-                    UserName = r["用户名"].ToString(),
-                    Password = r["密码"].ToString()
+                    UserName = r["username"].ToString(),
+                    Password = r["password"].ToString()
                 };
                 AllAccounts.Add(account);
             }

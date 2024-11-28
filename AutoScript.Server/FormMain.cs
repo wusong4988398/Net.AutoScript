@@ -19,6 +19,11 @@ namespace AutoScript.Server
         public FormMain()
         {
             InitializeComponent();
+
+
+         
+
+
         }
         private IHost _host;
         private IController singleController;
@@ -26,6 +31,45 @@ namespace AutoScript.Server
         {
             this._host=host;
             singleController = this._host.Services.GetRequiredService<SingleController>();
+ 
+
+            //Device.Reload();
+            //Account.Reload();
+            //List<Account> accounts = Account.GetAccounts();
+            //List<IDevice> devices = Device.GetAllDevices();
+
+            //if (devices.Any())
+            //{
+            //    int deviceIndex = 0;//用于跟踪设备列表的索引
+            //    foreach (Account account in accounts)
+            //    {
+            //        if (deviceIndex > devices.Count - 1) break;
+            //        // 使用模运算确保deviceIndex不会超出设备列表的范围
+            //        IDevice device = devices[deviceIndex];
+            //        account.Hwnd = device.Hwnd;
+            //        account.DeviceName = device.Title;
+            //        // 更新设备索引
+            //        deviceIndex++;
+            //    }
+
+            //}
+
+
+            ////绑定到列表控件
+            //dgvList.DataSource = accounts;
+            //dgvList.Columns[0].DataPropertyName = "UserName";
+            //dgvList.Columns[1].DataPropertyName = "Password";
+            //dgvList.Columns[2].DataPropertyName = "DeviceName";
+            //dgvList.Columns[3].DataPropertyName = "Hwnd";
+
+            ////多余的列隐藏
+            //foreach (DataGridViewColumn item in dgvList.Columns)
+            //{
+            //    if (item.Index > 5)
+            //    {
+            //        item.Visible = false;
+            //    }
+            //}
         }
 
 
@@ -66,6 +110,7 @@ namespace AutoScript.Server
 
                 //绑定到列表控件
                 dgvList.DataSource = accounts;
+                //dgvList.DataSource = new BindingList<Account>(accounts);
                 dgvList.Columns[0].DataPropertyName = "UserName";
                 dgvList.Columns[1].DataPropertyName = "Password";
                 dgvList.Columns[2].DataPropertyName = "DeviceName";

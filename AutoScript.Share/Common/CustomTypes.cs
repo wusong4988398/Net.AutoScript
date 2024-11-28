@@ -110,6 +110,10 @@ namespace AutoScript.Share
         /// 动作类型
         /// </summary>
         public ActionType ActionType = ActionType.Click;
+        /// <summary>
+        /// 未找到目标次数,如果大于0 则如果执行的次数超过这个数，则结束任务
+        /// </summary>
+        public int NotFindCount = 0;
     }
     /// <summary>
     /// 动作类型

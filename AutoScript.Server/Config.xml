@@ -30,13 +30,31 @@
 		<property name="PackageName" value="com.ledo.areal.ledo/.MyGame"/>
 	</object>-->
 
-	<object name="GameWindow" type="AutoScript.Share.Config_GameWindow, AutoScript.Share">
+	<!--<object name="GameWindow" type="AutoScript.Share.Config_GameWindow, AutoScript.Share">
 		<property name="MemProcessName" value="MyGame_x64r"/>
 		<property name="WindowProcessName" value="MyGame_x64r"/>
 		<property name="WindowTitle" value="梦幻西游：时空"/>
 		<property name="WindowClassName" value=""/>
 		<property name="PackageName" value="com.ledo.areal.ledo/.MyGame"/>
+	</object>-->
+	<object name="GameWindow" type="AutoScript.Share.Config_GameWindow, AutoScript.Share">
+
+		<property name="MemProcessName" value="scrcpy"/>
+		<property name="WindowProcessName" value="scrcpy"/>
+		<property name="WindowTitle" value="M2012K11AC"/>
+		<property name="WindowClassName" value=""/>
+		<property name="PackageName" value="com.ledo.areal.ledo/.MyGame"/>
 	</object>
+
+
+	<!--<object name="GameWindow" type="AutoScript.Share.Config_GameWindow, AutoScript.Share">
+
+		<property name="MemProcessName" value="notepad"/>
+		<property name="WindowProcessName" value="notepad"/>
+		<property name="WindowTitle" value=""/>
+		<property name="WindowClassName" value=""/>
+		<property name="PackageName" value="com.ledo.areal.ledo/.MyGame"/>
+	</object>-->
 	
 	<!--设备对象-->
 	<object name="Device" type="AutoScript.Share.DevicePC,AutoScript.Share" singleton="false"></object>

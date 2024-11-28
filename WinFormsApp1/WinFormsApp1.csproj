@@ -36,4 +36,13 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="libs\dm.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libs\DmReg.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

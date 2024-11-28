@@ -1,4 +1,4 @@
-﻿using AoJiaLib;
+﻿
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System;
@@ -14,8 +14,8 @@ namespace AutoScript.Share
     public class DeviceScreenAj : IDeviceScreen
     {
         private IDevice device;
-        private AoJiaD aj;
-        public DeviceScreenAj(IDevice device, AoJiaD aj)
+        private AoJia aj;
+        public DeviceScreenAj(IDevice device, AoJia aj)
         {
             this.device = device;
             this.aj = aj;
@@ -23,7 +23,8 @@ namespace AutoScript.Share
         }
         public ImageInfo 找屏(ImageInfo info)
         {
-            object x, y,pic;
+            int x, y;
+            string pic;
             if (info.PicName.Length > 0)
             {
                 aj.FindPic(info.Range.x1, info.Range.y1, info.Range.x2, info.Range.y2, info.PicName + ".bmp",

@@ -8,10 +8,10 @@ namespace AutoScript.Share
 {
     public class DmServiceImpl : IDmService
     {
-        private Dm.dmsoft _dmInstance;
+        private Idmsoft _dmInstance;
         public DmServiceImpl()
         {
-            _dmInstance=new Dm.dmsoft();
+            _dmInstance = DMP.CreateDM();
         }
         public void BindWindow(int hWnd, string display, string mouse, string keyboard, int mode)
         {

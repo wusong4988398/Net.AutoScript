@@ -1,4 +1,4 @@
-﻿using AoJiaLib;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +13,11 @@ namespace AutoScript.Share
     public class AJInput : IDeviceInput
     {
         //private Dm.dmsoft dm = new Dm.dmsoft();
-        private AoJiaD aj;
+        private AoJia aj;
         public IDevice Device { get; set; }
 
 
-        public AJInput(IDevice device, AoJiaD aj)
+        public AJInput(IDevice device, AoJia aj)
         {
             this.Device = device;
             this.aj = aj;

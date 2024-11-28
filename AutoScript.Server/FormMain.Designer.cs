@@ -60,7 +60,7 @@
             tabControl1.Location = new Point(3, -2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(631, 452);
+            tabControl1.Size = new Size(631, 512);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -69,10 +69,10 @@
             tabPage1.Controls.Add(BtnImport);
             tabPage1.Controls.Add(textBox1);
             tabPage1.Controls.Add(label1);
-            tabPage1.Location = new Point(4, 24);
+            tabPage1.Location = new Point(4, 26);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(623, 424);
+            tabPage1.Size = new Size(623, 482);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "主控窗口";
             tabPage1.UseVisualStyleBackColor = true;
@@ -83,11 +83,11 @@
             dgvList.AllowUserToDeleteRows = false;
             dgvList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvList.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column6, Column4, Column5 });
-            dgvList.Location = new Point(6, 60);
+            dgvList.Location = new Point(6, 68);
             dgvList.Name = "dgvList";
             dgvList.ReadOnly = true;
             dgvList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvList.Size = new Size(624, 361);
+            dgvList.Size = new Size(624, 409);
             dgvList.TabIndex = 3;
             dgvList.CellContentClick += dgvList_CellContentClick;
             // 
@@ -129,9 +129,9 @@
             // 
             // BtnImport
             // 
-            BtnImport.Location = new Point(522, 22);
+            BtnImport.Location = new Point(522, 25);
             BtnImport.Name = "BtnImport";
-            BtnImport.Size = new Size(99, 23);
+            BtnImport.Size = new Size(99, 26);
             BtnImport.TabIndex = 2;
             BtnImport.Text = "导入账号文件";
             BtnImport.UseVisualStyleBackColor = true;
@@ -139,7 +139,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(71, 22);
+            textBox1.Location = new Point(71, 25);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(445, 23);
             textBox1.TabIndex = 1;
@@ -147,18 +147,18 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(6, 26);
+            label1.Location = new Point(6, 29);
             label1.Name = "label1";
-            label1.Size = new Size(59, 15);
+            label1.Size = new Size(56, 17);
             label1.TabIndex = 0;
             label1.Text = "账号文件";
             // 
             // tabPage2
             // 
-            tabPage2.Location = new Point(4, 24);
+            tabPage2.Location = new Point(4, 26);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(623, 424);
+            tabPage2.Size = new Size(623, 482);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "设置";
             tabPage2.UseVisualStyleBackColor = true;
@@ -169,9 +169,9 @@
             // 
             // BtnRefresh
             // 
-            BtnRefresh.Location = new Point(640, 22);
+            BtnRefresh.Location = new Point(640, 25);
             BtnRefresh.Name = "BtnRefresh";
-            BtnRefresh.Size = new Size(87, 23);
+            BtnRefresh.Size = new Size(87, 26);
             BtnRefresh.TabIndex = 1;
             BtnRefresh.Text = "刷新设备";
             BtnRefresh.UseVisualStyleBackColor = true;
@@ -179,19 +179,19 @@
             // 
             // txtScript
             // 
-            txtScript.Location = new Point(636, 82);
+            txtScript.Location = new Point(636, 93);
             txtScript.Multiline = true;
             txtScript.Name = "txtScript";
-            txtScript.Size = new Size(161, 165);
+            txtScript.Size = new Size(161, 186);
             txtScript.TabIndex = 2;
-            txtScript.Text = "师门 \r\n宝图\r\n登入\r\n登出";
+            txtScript.Text = "挖宝图";
             txtScript.TextChanged += txtScript_TextChanged;
             // 
             // btnStart
             // 
-            btnStart.Location = new Point(641, 342);
+            btnStart.Location = new Point(641, 388);
             btnStart.Name = "btnStart";
-            btnStart.Size = new Size(75, 23);
+            btnStart.Size = new Size(75, 26);
             btnStart.TabIndex = 3;
             btnStart.Text = "启动";
             btnStart.UseVisualStyleBackColor = true;
@@ -199,9 +199,9 @@
             // 
             // btnStop
             // 
-            btnStop.Location = new Point(722, 342);
+            btnStop.Location = new Point(722, 388);
             btnStop.Name = "btnStop";
-            btnStop.Size = new Size(75, 23);
+            btnStop.Size = new Size(75, 26);
             btnStop.TabIndex = 4;
             btnStop.Text = "停止";
             btnStop.UseVisualStyleBackColor = true;
@@ -209,9 +209,9 @@
             // 
             // btnStartAll
             // 
-            btnStartAll.Location = new Point(643, 371);
+            btnStartAll.Location = new Point(643, 420);
             btnStartAll.Name = "btnStartAll";
-            btnStartAll.Size = new Size(75, 23);
+            btnStartAll.Size = new Size(75, 26);
             btnStartAll.TabIndex = 5;
             btnStartAll.Text = "启动全部";
             btnStartAll.UseVisualStyleBackColor = true;
@@ -219,9 +219,9 @@
             // 
             // btnStopAll
             // 
-            btnStopAll.Location = new Point(722, 371);
+            btnStopAll.Location = new Point(722, 420);
             btnStopAll.Name = "btnStopAll";
-            btnStopAll.Size = new Size(75, 23);
+            btnStopAll.Size = new Size(75, 26);
             btnStopAll.TabIndex = 6;
             btnStopAll.Text = "停止全部";
             btnStopAll.UseVisualStyleBackColor = true;
@@ -229,9 +229,9 @@
             // 
             // FormMain
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 510);
             Controls.Add(btnStopAll);
             Controls.Add(btnStartAll);
             Controls.Add(btnStop);

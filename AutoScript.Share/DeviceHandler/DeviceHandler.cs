@@ -1,5 +1,4 @@
-﻿using AoJiaLib;
-using Microsoft.AspNetCore.SignalR.Client;
+﻿using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,8 +14,8 @@ namespace AutoScript.Share
     public class DeviceHandler :  IDeviceInput, IDeviceScreen, IDeviceMemory, IDevicePacket
     {
         public IDevice Device { get ; set ; }
-        public Dm.dmsoft dm;
-        public AoJiaD aj;
+        public DmSoftClass dm;
+        public AoJia aj;
         private IDeviceInput deviceInput;
         private IDeviceScreen deviceScreen;
         private IDeviceMemory deviceMemory;
@@ -40,7 +39,22 @@ namespace AutoScript.Share
             //deviceInput = (IDeviceInput)Config.applicationContext.GetObject("DeviceInput", new object[] { device});
             if (Config.AppConfig.PlugeName == "AJ")//aj插件
             {
-                aj = new AoJiaD();
+
+                //下面的代码中ARegJ64.dll和AoJia64.dll的路径要换成你自己的,如果是32位运行环境,插件名和插件路径都要改成32位的
+                 aj = new AoJia(@"./libs/ARegJ64.dll", @"./libs/AoJia64.dll");
+
+                //或者像下面这样写,这种写法不用每次创建对象都调用CARegJ类的函数SetDllPathA,当然每次都调用也不会有问题
+                //CARegJ.SetDllPathA("C:\\Users\\Administrator\\Desktop\\AJ64\\ARegJ64.dll", "C:\\Users\\Administrator\\Desktop\\AJ64\\AoJia64.dll");
+                //CAoJia AJ = new CAoJia();
+
+                if (aj.ir == 0)
+                {
+                    Console.WriteLine("创建对象失败"); return;
+                }
+                string SA = aj.VerS(); Console.WriteLine("版本号: " + SA);
+                SA = aj.GetModulePath(0, 0, "AoJia64.dll", 0); Console.WriteLine("插件路径: " + SA);
+
+
                 aj.KQHouTai(device.Hwnd,
                     Config.AppConfig.Config_AJ.Display,
                     Config.AppConfig.Config_AJ.Mouse,
@@ -56,18 +70,42 @@ namespace AutoScript.Share
             }
             else if(Config.AppConfig.PlugeName == "DM")
             {
-                dm = new Dm.dmsoft();
-                dm.BindWindow(device.Hwnd,
+                // 免注册调用大漠插件
+                var registerDmSoftDllResult = RegisterDmSoft.RegisterDmSoftDll();
+                Console.WriteLine($"免注册调用大漠插件返回：{registerDmSoftDllResult}");
+                if (!registerDmSoftDllResult)
+                {
+                    throw new Exception("免注册调用大漠插件失败");
+                }
+
+
+                // 创建对象
+
+                dm = new DmSoftClass();
+                // 收费注册
+                var regResult = dm.Reg(Config_DM.DmRegCode, Config_DM.DmVerInfo);
+                Console.WriteLine($"收费注册返回：{regResult}");
+                if (regResult != 1)
+                {
+                    throw new Exception("收费注册失败");
+                }
+                dm.BindWindowEx(device.Hwnd,
+                //dm.BindWindow(7150958,
+                
                     Config.AppConfig.Config_DM.Display,
                     Config.AppConfig.Config_DM.Mouse,
                     Config.AppConfig.Config_DM.KeyBorad,
+                    "dx.mouse.position.lock.api",
                     Config.AppConfig.Config_DM.Mode);
                 dm.SetPath(Config.AppConfig.Config_DM.Path);
-                dm.SetWindowSize(this.Device.Hwnd, 650, 500);
+                dm.SetWindowSize(this.Device.Hwnd, 951, 460);
                 deviceInput = new DmInput(device, dm);
                 deviceScreen = new DeviceScreenDm(device, dm);
+                //dm.MoveTo(772, 327);
+                //Thread.Sleep(500);
+                //dm.LeftClick();
                 //dm.SetMemoryHwndAsProcessId(1);
-               //var result = dm.FindDataEx(42412, "0000000000000000-00007fffffffffff", "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 ?? ?? 00 00 ?? ?? 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ?? ?? 00 00 ?? ?? 00 00 00 3F 00 00 00 3F 01 00 00 00 00 00 ?? 42 00 00 ?? 42 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 ?? ?? 43 00 00 DC 42 00 00 00 00 00 00 80 3F 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 01 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 FE FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 ?? ?? ?? ?? ?? ?? 00 00 FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0F 00 00 00 00 00 00 00", 4, 1, 0);
+                //var result = dm.FindDataEx(42412, "0000000000000000-00007fffffffffff", "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 80 3F 00 00 ?? ?? 00 00 ?? ?? 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ?? ?? 00 00 ?? ?? 00 00 00 3F 00 00 00 3F 01 00 00 00 00 00 ?? 42 00 00 ?? 42 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 ?? ?? 43 00 00 DC 42 00 00 00 00 00 00 80 3F 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 01 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 3F 00 00 00 00 FE FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 ?? ?? ?? ?? ?? ?? 00 00 FF FF FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 0F 00 00 00 00 00 00 00", 4, 1, 0);
                 //Trace.WriteLine(result);
 
             }
@@ -102,6 +140,10 @@ namespace AutoScript.Share
             }
             return info;
         }
+
+
+
+
         public ImageInfo 找屏动作(List<string> names, ActionParam param)
         {
             if (names == null || names.Count == 0) return null;
@@ -123,6 +165,7 @@ namespace AutoScript.Share
         public ImageInfo 找屏动作(List<string> findLst, ActionParam findAction, List<string> stopLst, ActionParam stopAction)
         {
             ImageInfo ret = new ImageInfo();
+            int noFindCount = 0;//未找到目标次数，如果找了超过80次还没找到 则结束循环 结束任务！
             while (true)
             {
                 //防止卡死,强制停止
@@ -130,7 +173,12 @@ namespace AutoScript.Share
                 {
                     return ret;
                 }
-                找屏动作(findLst, findAction);
+                ImageInfo image= 找屏动作(findLst, findAction);
+                noFindCount = image.Result.isFinded ? 0 : ++noFindCount;
+                if (findAction.NotFindCount>0&&noFindCount > findAction.NotFindCount)
+                {
+                    return ret;
+                }
                 ret = 找屏动作(stopLst, stopAction);
                 if (ret.Result.isFinded)
                 {
@@ -139,6 +187,26 @@ namespace AutoScript.Share
                 Thread.Sleep(500);
             }
         }
+        /// <summary>
+        /// 循环找屏幕,到达一定次数则停止
+        /// </summary>
+        /// <param name="findLst"></param>
+        /// <param name="findAction"></param>
+        /// <param name="stopAction"></param>
+        /// <returns></returns>
+        public ImageInfo 找屏动作(List<string> findLst, ActionParam findAction,ActionParam stopAction)
+        {
+            ImageInfo ret = new ImageInfo();
+            int noFindCount = 0;//未找到目标次数，如果找了超过80次还没找到 则结束循环 结束任务！
+            while (noFindCount <= stopAction.NotFindCount)
+            {
+                ImageInfo image = 找屏动作(findLst, findAction);
+                noFindCount = image.Result.isFinded ? 0 : ++noFindCount;
+                Thread.Sleep(findAction.delay);
+            }
+            return ret;
+        }
+
         public void Intercept()
         {
             devicePacket.Intercept();

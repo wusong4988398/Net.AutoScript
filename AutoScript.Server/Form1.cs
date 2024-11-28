@@ -20,12 +20,12 @@ namespace AutoScript.Server
 
         private void button1_Click(object sender, EventArgs e)
         {
-            List<Account> accounts = Account.Reload("Resource/users.txt");
-            foreach (var account in accounts)
-            {
+            //List<Account> accounts = Account.Reload("Resource/users.txt");
+            //foreach (var account in accounts)
+            //{
                 
-            }
-            accounts.FirstOrDefault().Status = "333";
+            //}
+            //accounts.FirstOrDefault().Status = "333";
         }
     }
 }

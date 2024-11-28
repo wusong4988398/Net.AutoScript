@@ -11,11 +11,11 @@ namespace AutoScript.Share
     public class DmInput : IDeviceInput
     {
         //private Dm.dmsoft dm = new Dm.dmsoft();
-        private Dm.dmsoft dm;
+        private DmSoftClass dm;
         public IDevice Device { get; set; }
 
         
-        public DmInput(IDevice device, Dm.dmsoft dm)
+        public DmInput(IDevice device, DmSoftClass dm)
         {
             this.Device = device;
             this.dm = dm;

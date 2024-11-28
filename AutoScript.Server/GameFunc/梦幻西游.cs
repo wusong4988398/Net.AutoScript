@@ -15,32 +15,40 @@ namespace AutoScript.Server
         {
            
         }
+
+        private void 操作记事本()
+        {
+            this._currentOperation = "操作记事本";
+            while (true)
+            {
+                this.deviceHandler.dm.SendString(this.deviceHandler.Device.Hwnd, "我是来测试的");
+                Thread.Sleep(1500);
+
+            }
+
+        }
         private async void 挖宝图()
         {
 
-            //double value= await this.deviceHandler.ReadMemoryByFeatureCode<double>("C5 8B 00 00 00 ?? ?? 40 03 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 05 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 01 00 00 00 ?? ?? 00 00 01 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? 00 00 00 00 00 00 00 00 00 C5 8B 00 00 00 00 ?? 40 03 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 05 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? 00 00 00 00 00 00 00 00 00 ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 04 00 00 00 ?? ?? ?? ?? 00 00 00 00 00 00 00 00 C5 8B 00 00 00");
-            //MemLib.OpenProcess(this.deviceHandler.Device.Pid);
-            
-            ////IEnumerable<long> AoBScanResults = MemLib.AoBScan(0x01000000, 0x04000000, "?? ?? ?? ?5 ?? ?? 5? 00 ?? 00 00 00 ?? 00 50 00", false, true).Result;
-            //var speedAddr = MemLib.AoBScan("24 E9 39 74 34 15 F0 9C").Result;
-            ////byte[] fd = API.StrToToHexByte("24 E9 39 74 34 15 F0 9C");
-            //IntPtr addr = new IntPtr(0x10FFFFFF);
-            //API.GetAddressByFeatureCode2(this.deviceHandler.Device.Pid);
-            //addr = API.GetAddressByFeatureCode(this.deviceHandler.Device.Pid, new byte[] { 0x24, 0xE9, 0x39, 0x74, 0x34, 0x15, 0xF0, 0x9C }, 5, addr, new IntPtr(0x7FFFFFFF));
-            //string strInfo = API.GetMemString(this.deviceHandler.Device.Pid, addr, 10, Encoding.UTF8);
-            //int index_end = strInfo.IndexOf("\"");
-            //strInfo = strInfo.Substring(0, index_end);
-
 
             this._currentOperation = "挖宝图";
-            ActionParam param = new ActionParam() { delay = 500 };  //动作参数对象
-            this.deviceHandler.找屏动作(["包裹"], param, ["包裹弹窗"], null);
-            this.deviceHandler.找屏动作(["宝图图标"], param, ["包裹"], null);
+            ActionParam param = new ActionParam() { delay = 1000,NotFindCount=60};  //动作参数对象
 
+           // this.deviceHandler.找屏动作(["scrcpy_包裹", "scrcpy_宝图图标", "scrcpy_包裹_藏宝图_使用", "右下角_使用"], param, new ActionParam() { delay = 1500, NotFindCount = 80 });
+
+            this.deviceHandler.找屏动作(["scrcpy_包裹"], param, ["scrcpy_宝图图标"],new ActionParam { delay=500});
+
+            this.deviceHandler.找屏动作(["scrcpy_包裹_藏宝图_使用", "右下角_使用",], param, new ActionParam() { delay = 1500, NotFindCount = 80 });
+
+
+            //this.deviceHandler.找屏动作(["scrcpy_包裹"], param, ["scrcpy_包裹弹窗"], null);
+            //this.deviceHandler.找屏动作(["scrcpy_宝图图标"], param, ["scrcpy_包裹_藏宝图_使用"], new ActionParam { delay=500});
+            //this.deviceHandler.找屏动作(["右下角_使用"], new ActionParam() { delay = 1500 }, new ActionParam() { NotFindCount = 100 });
+            //this._currentOperation = "挖宝图任务结束!!!";
 
 
         }
-        private void 宝图()
+        private void 打宝图()
         {
             this._currentOperation = "宝图任务";
             ActionParam param = new ActionParam() { delay = 500 };  //动作参数对象
@@ -169,9 +177,9 @@ namespace AutoScript.Server
             while (!token.IsCancellationRequested && _currentOperation != "Executed main script tasks")
             {
                 // 检测游戏窗口是否卡死、窗口是否崩溃等操作
-                Trace.WriteLine(Thread.CurrentThread.ManagedThreadId + $"Monitoring... Current operation: {_currentOperation}");
+               // Trace.WriteLine(Thread.CurrentThread.ManagedThreadId + $"Monitoring... Current operation: {_currentOperation}");
 
-                SubDelay(500);
+                //SubDelay(500);
                 //await Task.Delay(500); // 模拟监控操作
             }
             Trace.WriteLine(Thread.CurrentThread.ManagedThreadId + $"监控任务执行完毕.................");
