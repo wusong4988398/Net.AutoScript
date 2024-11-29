@@ -20,6 +20,15 @@ namespace AutoScript.Server
         private Task _mainTask;
         private Task _monitorTask;
         protected string _currentOperation;
+        protected GameStatus _gameStatus= GameStatus.Running;
+
+        protected bool IsStoped {  get; set; }
+
+        protected bool IsRunning { get; set; }
+
+        protected bool IsCombating { get; set; }
+
+
         public static event EventHandler StatusChangedEvent;
 
         private GameHelperArgs args = new GameHelperArgs();

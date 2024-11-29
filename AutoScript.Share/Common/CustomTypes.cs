@@ -115,6 +115,36 @@ namespace AutoScript.Share
         /// </summary>
         public int NotFindCount = 0;
     }
+
+    public class Position
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public Position(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        // 重写 Equals 方法，以便于比较两个 Position 对象是否相等
+        public override bool Equals(object obj)
+        {
+            if (obj is Position other)
+            {
+                return X == other.X && Y == other.Y;
+            }
+            return false;
+        }
+
+        // 重写 GetHashCode 方法，配合 Equals 使用
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(X, Y);
+        }
+    }
+
+
     /// <summary>
     /// 动作类型
     /// </summary>
@@ -123,6 +153,7 @@ namespace AutoScript.Share
         None = 0,
         Click = 1,
         SendStr = 2,
+        DoubleClick=3,
         SendKey = 4,
         Swipe = 8
     }
@@ -136,6 +167,15 @@ namespace AutoScript.Share
         Stoped = 2,
         Offline = 3,
         Finish =4
+    }
+
+
+    public enum GameStatus
+    {
+        Running=0,//运行中
+        Stoped=1,//停止/页面卡住
+        Combat=2//战斗中
+
     }
     /// <summary>
     /// GameHelper产生变化时候的事件自定义参数

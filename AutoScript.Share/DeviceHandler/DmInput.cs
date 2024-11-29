@@ -30,7 +30,15 @@ namespace AutoScript.Share
 
             dm.MoveTo(param.Point.x, param.Point.y);
             Thread.Sleep(param.delay);
-            dm.LeftClick();
+            if (param.ActionType==ActionType.DoubleClick)
+            {
+                dm.LeftDoubleClick();
+            }
+            else
+            {
+                dm.LeftClick();
+            }
+            
         }
 
         //long SendString(hwnd, str)

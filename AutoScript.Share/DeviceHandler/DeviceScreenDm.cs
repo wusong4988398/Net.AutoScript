@@ -6,6 +6,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using OpenCvSharp;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Runtime.InteropServices;
 
 namespace AutoScript.Share
 {
@@ -51,16 +54,30 @@ namespace AutoScript.Share
         public unsafe ImageInfo OCR(ImageInfo info)
         {
             this.dm.Capture(info.Range.x1, info.Range.y1, info.Range.x2, info.Range.y2,"1.png");
-            //Bitmap S_bmp = 截屏(info.Range.x1, info.Range.y1, info.Range.x2, info.Range.y2);
-            // 图片文件路径
-            string imagePath = @"Resource/pic/1.png";
+            
 
-            // 读取图片文件为字节数组
-            byte[] imageBytes = File.ReadAllBytes(imagePath);
-            Console.WriteLine("32323");
+
+            int fanHui = 0;
+            int data = 0;
+            int size = 0;
+            fanHui = dm.GetScreenDataBmp(info.Range.x1, info.Range.y1, info.Range.x2, info.Range.y2, out data, out size);
+            byte[] genePic2 = new byte[(int)size];
+            IntPtr ptr = new IntPtr((int)data);
+            for (int i = 0; i < (int)size; i++)
+            {
+                genePic2[i] = Marshal.ReadByte(ptr + 1 * i);
+            }
+
+            //Bitmap S_bmp = 截屏(info.Range.x1, info.Range.y1, info.Range.x2, info.Range.y2);
+            //// 图片文件路径
+            //string imagePath = @"Resource/pic/1.png";
+
+            //// 读取图片文件为字节数组
+            //byte[] imageBytes = File.ReadAllBytes(imagePath);
+            //Console.WriteLine("32323");
             //Bitmap S_bmp = null;
             //string base64 = Utility.ImgToBase64String(S_bmp);
-            string base64 = Convert.ToBase64String(imageBytes);
+            string base64 = Convert.ToBase64String(genePic2);
 
             Stopwatch sw = new Stopwatch();
             sw.Start();

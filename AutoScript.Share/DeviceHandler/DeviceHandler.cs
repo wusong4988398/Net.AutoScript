@@ -148,11 +148,15 @@ namespace AutoScript.Share
         {
             if (names == null || names.Count == 0) return null;
             List<ImageInfo> infos =  ImageInfo.AllImageInfos.FindAll(p => { return names.Contains(p.Name); });
+            foreach (ImageInfo info in infos) {
+
+                info.Result = (-1, -1, false);
+                info.OcrString = "";
+            }
             ImageInfo ret = new ImageInfo();
             foreach (var info in infos)
             {
-                info.Result = (-1, -1, false);
-                
+            
                 ret = 找屏动作(info, param);
                 if (ret.Result.isFinded)
                 {
@@ -179,6 +183,7 @@ namespace AutoScript.Share
                 {
                     return ret;
                 }
+                Thread.Sleep(500);
                 ret = 找屏动作(stopLst, stopAction);
                 if (ret.Result.isFinded)
                 {
