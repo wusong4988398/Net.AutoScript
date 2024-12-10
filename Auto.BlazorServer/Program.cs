@@ -61,6 +61,8 @@ namespace Auto.BlazorServer
             log.LogInformation(
             $"{Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName} " +
             $"{DateTimeOffset.Now}");
+            services.AddStartupConfigurations(configuration);
+            //services.AddWoWProcess(log);
         }
     }
 }
