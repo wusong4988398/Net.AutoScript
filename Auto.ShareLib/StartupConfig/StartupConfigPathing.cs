@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoScript.Share
+namespace Auto.ShareLib
 {
     public sealed class StartupConfigPathing
     {

@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AutoScript.Share\AutoScript.Share.csproj" />
+    <ProjectReference Include="..\Auto.Core\Auto.Core.csproj" />
   </ItemGroup>
 
 </Project>

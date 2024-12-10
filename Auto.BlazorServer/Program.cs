@@ -1,4 +1,5 @@
 using Auto.BlazorServer.Data;
+using Auto.Core;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Serilog;
@@ -62,7 +63,7 @@ namespace Auto.BlazorServer
             $"{Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName} " +
             $"{DateTimeOffset.Now}");
             services.AddStartupConfigurations(configuration);
-            //services.AddWoWProcess(log);
+            services.AddWoWProcess(log);
         }
     }
 }

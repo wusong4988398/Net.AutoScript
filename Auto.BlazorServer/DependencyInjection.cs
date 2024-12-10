@@ -1,4 +1,6 @@
-﻿using AutoScript.Share;
+﻿
+
+using Auto.ShareLib;
 
 namespace Auto.BlazorServer
 {
