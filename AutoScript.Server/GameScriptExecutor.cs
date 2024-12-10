@@ -21,8 +21,16 @@ namespace AutoScript.Server
         private Task _monitorTask;
         protected string _currentOperation;
         protected GameStatus _gameStatus= GameStatus.Running;
+        /// <summary>
+        ///当前人物坐标
+        /// </summary>
+        protected Position Position {  get; set; }
 
         protected bool IsStoped {  get; set; }
+        /// <summary>
+        /// 窗口是否遮挡
+        /// </summary>
+        protected bool IsGameWindowBlocked {  get; set; }
 
         protected bool IsRunning { get; set; }
 

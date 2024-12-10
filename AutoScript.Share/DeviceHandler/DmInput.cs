@@ -67,10 +67,13 @@ namespace AutoScript.Share
             {
                 return;
             }
+            //Thread.Sleep(500);
             dm.MoveTo(param.Swipe.x1, param.Swipe.y1);
-            dm.LeftDown();
             Thread.Sleep(param.delay);
+            dm.LeftDown();
+   
             dm.MoveTo(param.Swipe.x2, param.Swipe.y2);
+            Thread.Sleep(param.delay);
             dm.LeftUp();
         }
 

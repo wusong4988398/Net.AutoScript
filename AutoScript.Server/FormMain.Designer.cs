@@ -184,7 +184,7 @@
             txtScript.Name = "txtScript";
             txtScript.Size = new Size(161, 186);
             txtScript.TabIndex = 2;
-            txtScript.Text = "秘境降妖";
+            txtScript.Text = "打宝图\r\n秘境降妖";
             txtScript.TextChanged += txtScript_TextChanged;
             // 
             // btnStart

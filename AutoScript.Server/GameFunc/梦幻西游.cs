@@ -39,7 +39,7 @@ namespace AutoScript.Server
            // this.deviceHandler.找屏动作(["scrcpy_包裹", "scrcpy_宝图图标", "scrcpy_包裹_藏宝图_使用", "右下角_使用"], param, new ActionParam() { delay = 1500, NotFindCount = 80 });
 
             this.deviceHandler.找屏动作(["scrcpy_包裹"], param, ["scrcpy_宝图图标"],new ActionParam { delay=500});
-            this.deviceHandler.找屏动作(["scrcpy_包裹_藏宝图_使用", "右下角_使用"], param, new ActionParam() { delay = 1500, NotFindCount = 80 });
+            this.deviceHandler.找屏动作(["scrcpy_包裹_藏宝图_使用", "右下角_使用"], param, new ActionParam() { delay = 1500, NotFindCount = 100 });
 
 
             //this.deviceHandler.找屏动作(["scrcpy_包裹"], param, ["scrcpy_包裹弹窗"], null);
@@ -51,19 +51,32 @@ namespace AutoScript.Server
         }
         private void 打宝图()
         {
+
+
+
+            //while (true) { 
+
+            //}
+            Thread.Sleep(3000);
+
             this._currentOperation = "打宝图";
+            if (!this.IsCombating && this.IsGameWindowBlocked) this.deviceHandler.dm.RightClick();
+            var cur_pos = this.GetRolePosition();
             ActionParam param = new ActionParam() { delay = 500 };  //动作参数对象
                                                                     //ImageInfo info=this.deviceHandler.找屏动作(["活动图标"], param, ["师门任务"], new ActionParam());
                                                                     //scrcpy_日常-宝图任务
-            this.deviceHandler.找屏动作(["scrcpy_活动图标"], param, ["scrcpy_宝图任务"], new ActionParam { delay = 500 });
-         
-           // this.deviceHandler.滑动(new ActionParam { ActionType = ActionType.Swipe, Swipe = (809, 117, 809, 224) });
+            //this.deviceHandler.找屏动作(["scrcpy_活动图标"], param, ["scrcpy_宝图任务"], new ActionParam { delay = 500 });
             
-            this.deviceHandler.找屏动作(["scrcpy_请选择要做的事_听听无妨"], param, ["scrcpy_日常-宝图任务"], new ActionParam { delay = 500, ActionType = ActionType.DoubleClick });
+            
+            //this.deviceHandler.找屏动作(["scrcpy_请选择要做的事_听听无妨"], param, ["scrcpy_日常-宝图任务"], new ActionParam { delay = 500, ActionType = ActionType.DoubleClick });
 
-            this.deviceHandler.找屏动作(["scrcpy_日常-宝图任务"], new ActionParam() { delay = 6500 }, new ActionParam() { delay = 1500, NotFindCount = 80 });
+            //this.deviceHandler.找屏动作(["scrcpy_日常-宝图任务"], new ActionParam() { delay = 500 }, new ActionParam() { delay = 1500, NotFindCount = 15 });
+            //var pre_pos = this.Position;
+            //if (!this.IsCombating && (cur_pos.Item1==pre_pos.X&& cur_pos.Item2 == pre_pos.Y)) this.deviceHandler.滑动(new ActionParam { ActionType = ActionType.Swipe, Swipe = (809, 117, 809, 224) });
 
+            this.deviceHandler.找屏动作(["scrcpy_日常-宝图任务"], new ActionParam() { delay = 6500 }, new ActionParam() { delay = 1500, NotFindCount = 2 });
 
+            Trace.WriteLine("打宝图任务结束!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             //this.deviceHandler.找屏动作(["活动图标"], param, ["活动弹窗"], new ActionParam());
             //ImageInfo info = this.deviceHandler.找屏动作(["宝图任务"], new ActionParam());
             //if (!info.Result.isFinded) return;
@@ -115,16 +128,8 @@ namespace AutoScript.Server
             //Trace.WriteLine("当前坐标："+cc.OcrString);
             //var pos = GetRolePosition();
             //Trace.WriteLine($"位置: ({pos.Item1}, {pos.Item2})");
+            if (!this.IsCombating && this.IsGameWindowBlocked) this.deviceHandler.dm.RightClick();
 
-            while (true) { 
-             Thread.Sleep(2000);
-                if (!this.IsCombating&&this.IsStoped)
-                {
-                    return;
-                }
-            }
-
-      
 
             this.deviceHandler.找屏动作(["scrcpy_活动图标"], param, ["scrcpy_秘境降妖"], new ActionParam { delay = 500 });
 
@@ -236,11 +241,123 @@ namespace AutoScript.Server
             this.MainDelay(1000);
             Trace.WriteLine("登入" + Thread.CurrentThread.ManagedThreadId);
         }
+        private void 快手看直播领金币()
+        {
+            while (true)
+            {
 
+                Thread.Sleep(1500);
+                ImageInfo imageInfo = this.deviceHandler.找屏动作(["快手_浏览内容领金币"], new ActionParam { ActionType = ActionType.None });
+                if (imageInfo.Result.isFinded)
+                {
+                    this.deviceHandler.滑动(new ActionParam { ActionType = ActionType.Swipe, Swipe = (210, 794, 210, 328) });
+                    Thread.Sleep(3500);
+                    this.deviceHandler.点击(new ActionParam { Point = (imageInfo.Result.x, imageInfo.Result.y + 200) });
+
+
+                    Thread.Sleep(38000);
+                    this.deviceHandler.滑动(new ActionParam { ActionType = ActionType.Swipe, Swipe = (0, 375, 300, 375) });
+                    Thread.Sleep(2500);
+                    this.deviceHandler.找屏动作(["快手_退出直播间"], new ActionParam { ActionType = ActionType.Click });
+
+                }
+
+
+
+                //快手_直播间_已领取
+                //ImageInfo imageInfo2 = this.deviceHandler.找屏动作(["快手_直播间_已领取"], new ActionParam { ActionType = ActionType.None });
+                //if (imageInfo2.Result.isFinded)
+                //{
+                //    this.deviceHandler.滑动(new ActionParam { ActionType = ActionType.Swipe, Swipe = (0, 375, 300, 375) });
+                //    Thread.Sleep(2500);
+                //    this.deviceHandler.找屏动作(["快手_退出直播间"], new ActionParam { ActionType = ActionType.Click });
+
+
+                //}
+
+
+
+
+
+
+                Thread.Sleep(2000);
+
+            }
+        }
         private void 清理背包()
         {
             this._currentOperation = "清理背包";
+            ActionParam param = new ActionParam() { delay = 500 };
 
+            //this.deviceHandler.滑动(new ActionParam { ActionType = ActionType.Swipe, Swipe = (210, 794, 210, 328),delay=500 });return;
+            ////this.deviceHandler.dm.WheelDown();
+
+            //return;
+            while (true)
+            {
+
+                //this.deviceHandler.找屏动作(new List<string> { "scrcpy_小关闭", "scrcpy_大关闭", "scrcpy_中关闭", "scrcpy_大关闭2", "scrcpy_大关闭_排行榜", "scrcpy_大关闭_我的好友", "scrcpy_关闭_大地图" }, param, new List<string> { "scrcpy_活动图标" }, null);
+                if (!this.IsCombating && this.IsGameWindowBlocked)
+                {
+                    this.deviceHandler.dm.RightClick();
+                }
+                Thread.Sleep(2000);
+            }
+
+
+            this.deviceHandler.找屏动作(["scrcpy_主界面_更多_展开按钮", "scrcpy_主界面_更多_系统按钮", "scrcpy_主界面_更多_系统_切换账号图片", "scrcpy_主界面_更多_系统_切换账号_确认", "scrcpy_登录页面_登录文字", "scrcpy_登录页面_切换角色", "scrcpy_登录页面_切换角色_已有角色"], param, new ActionParam() { delay = 500,NotFindCount=5 });
+
+            List<Position> points = new List<Position>() { new Position(389,110), new Position(540, 113) , new Position(672, 109) , new Position(385, 285) , new Position(534, 284) , new Position(673, 286) };
+            //List<Position> reversedPoints = points.ToList(); // 创建副本
+            points.Reverse(); // 反转副本
+            foreach (var point in points) {
+
+                this.deviceHandler.点击(new ActionParam { Point = (point.X, point.Y) });
+                Thread.Sleep(1500);
+                var info= this.deviceHandler.找屏动作(["scrcpy_登录页面_切换角色_服务器选择"], new ActionParam { ActionType=ActionType.None});
+                if (!info.Result.isFinded)
+                {
+                    break;
+                }
+
+            }
+
+
+            this.deviceHandler.找屏动作(new List<string> { "scrcpy_小关闭", "scrcpy_大关闭", "scrcpy_中关闭", "scrcpy_大关闭2", "scrcpy_大关闭_排行榜", "scrcpy_大关闭_我的好友", "scrcpy_关闭_大地图" }, param, new List<string> { "scrcpy_活动图标" }, null);
+
+       
+
+            return;
+
+            while (true)//找宝石、制造书、百炼精铁出售
+            {
+                ImageInfo imageInfo = this.deviceHandler.找屏动作(["scrcpy_翡翠石", "scrcpy_太阳石", "scrcpy_昆仑玉", "scrcpy_神秘石", "scrcpy_月亮石", "scrcpy_黑宝石", "scrcpy_舍利子", "scrcpy_红纹石", "scrcpy_百炼精铁", "scrcpy_制造书", "scrcpy_光芒石"], new ActionParam { NotFindCount = 20 }, ["scrcpy_宝石点击_更多按钮", "scrcpy_物品点击_商会出售"], param);
+                this.deviceHandler.找屏动作(["scrcpy_宝石点击_更多_商会出售"], new ActionParam { NotFindCount = 10 }, ["scrcpy_宝石点击_更多_商会出售_出售"], param);
+                this.deviceHandler.找屏动作(["scrcpy_宝石点击_更多_商会出售_出售"], param);
+                if (!imageInfo.Result.isFinded)
+                {
+                    Trace.WriteLine("没有找到宝石、制造书、百炼精铁等物品 任务结束！！！！！！");
+                    break;
+                }
+
+
+                Thread.Sleep(2000);
+           
+            }
+
+            while (true)//藏宝图
+            {
+                this.deviceHandler.找屏动作(["scrcpy_宝图图标"], new ActionParam { NotFindCount = 20 }, ["scrcpy_包裹_藏宝图_使用"], new ActionParam { delay = 500 });
+                ImageInfo imageInfo =  this.deviceHandler.找屏动作(["右下角_使用"], param, new ActionParam() { delay = 1500, NotFindCount = 100 });
+                if (!imageInfo.Result.isFinded)
+                {
+                    Trace.WriteLine("没有找到宝图 任务结束！！！！！！");
+                    break;
+                }
+
+                Thread.Sleep(2000);
+
+            }
 
 
 
@@ -306,6 +423,7 @@ namespace AutoScript.Server
             this._currentOperation = "登录操作中，请等待......";
             this.MainDelay(2000);
 
+
             Trace.WriteLine("登出" + Thread.CurrentThread.ManagedThreadId);
         }
 
@@ -319,30 +437,35 @@ namespace AutoScript.Server
                 MovementDetector detector = new MovementDetector(20);
                 while (!token.IsCancellationRequested && _currentOperation != "Executed main script tasks") {
                     var pos = GetRolePosition();
+
+                    this.IsGameWindowBlocked = pos.Item1 == -1 ? true : false;
                     detector.UpdatePosition(new Position(pos.Item1, pos.Item2));
                     this.IsStoped= detector.IsStoped;
-                    Trace.WriteLine($"当前页面是否卡住: {this.IsStoped}");
+                    //Trace.WriteLine($"当前页面是否卡住: {this.IsStoped}");
                     Thread.Sleep(20000);
                 }
 
             });
+
+
+     
 
             while (!token.IsCancellationRequested && _currentOperation != "Executed main script tasks")
             {
                 
                 // 检测游戏窗口是否卡死、窗口是否崩溃等操作
                 // Trace.WriteLine(Thread.CurrentThread.ManagedThreadId + $"Monitoring... Current operation: {_currentOperation}");
-                SubDelay(1000);
-                //var pos = GetRolePosition();
-
+       
+                var pos = GetRolePosition();
+                this.IsGameWindowBlocked = pos.Item1 == -1 ? true : false;
                 var info = this.deviceHandler.找屏动作(["scrcpy_战斗图标"], new ActionParam { ActionType = ActionType.None });
                 //Trace.WriteLine($"当前战斗状态: {info.Result.isFinded}");
-
+                this.Position=new Position(pos.Item1, pos.Item2);
                 this.IsCombating = info.Result.isFinded;
                 Trace.WriteLine($"当前战斗状态: {this.IsCombating}");
                 //Trace.WriteLine($"当前角色位置: ({pos.Item1}, {pos.Item2})");
                 //await Task.Delay(1000); // 模拟监控操作
-
+                SubDelay(1000);
 
             }
             Trace.WriteLine(Thread.CurrentThread.ManagedThreadId + $"监控任务执行完毕.................");

@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsApp1", "WinFormsApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoScript.API", "AutoScript.API\AutoScript.API.csproj", "{199B42BE-0A9B-4508-BF5F-B6D30E68EE9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RogueSharpRLNetSamples", "ConsoleApp3\RogueSharpRLNetSamples.csproj", "{1990F05E-36AC-49B2-AE18-756B32B98AD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auto.BlazorServer", "Auto.BlazorServer\Auto.BlazorServer.csproj", "{E191CED7-2C2F-4337-B2D5-F3B0D51865EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +71,22 @@ Global
 		{199B42BE-0A9B-4508-BF5F-B6D30E68EE9A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{199B42BE-0A9B-4508-BF5F-B6D30E68EE9A}.Release|x86.ActiveCfg = Release|Any CPU
 		{199B42BE-0A9B-4508-BF5F-B6D30E68EE9A}.Release|x86.Build.0 = Release|Any CPU
+		{1990F05E-36AC-49B2-AE18-756B32B98AD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1990F05E-36AC-49B2-AE18-756B32B98AD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1990F05E-36AC-49B2-AE18-756B32B98AD9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1990F05E-36AC-49B2-AE18-756B32B98AD9}.Debug|x86.Build.0 = Debug|Any CPU
+		{1990F05E-36AC-49B2-AE18-756B32B98AD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1990F05E-36AC-49B2-AE18-756B32B98AD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1990F05E-36AC-49B2-AE18-756B32B98AD9}.Release|x86.ActiveCfg = Release|Any CPU
+		{1990F05E-36AC-49B2-AE18-756B32B98AD9}.Release|x86.Build.0 = Release|Any CPU
+		{E191CED7-2C2F-4337-B2D5-F3B0D51865EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E191CED7-2C2F-4337-B2D5-F3B0D51865EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E191CED7-2C2F-4337-B2D5-F3B0D51865EC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E191CED7-2C2F-4337-B2D5-F3B0D51865EC}.Debug|x86.Build.0 = Debug|Any CPU
+		{E191CED7-2C2F-4337-B2D5-F3B0D51865EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E191CED7-2C2F-4337-B2D5-F3B0D51865EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E191CED7-2C2F-4337-B2D5-F3B0D51865EC}.Release|x86.ActiveCfg = Release|Any CPU
+		{E191CED7-2C2F-4337-B2D5-F3B0D51865EC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -116,7 +116,7 @@ namespace AutoScript.Share
         public int NotFindCount = 0;
     }
 
-    public class Position
+    public class Position:ICloneable
     {
         public int X { get; set; }
         public int Y { get; set; }
@@ -141,6 +141,12 @@ namespace AutoScript.Share
         public override int GetHashCode()
         {
             return HashCode.Combine(X, Y);
+        }
+
+        public object Clone()
+        {
+            Position rVal = new Position(this.X,this.Y);
+            return rVal;
         }
     }
 

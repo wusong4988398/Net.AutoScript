@@ -6,6 +6,8 @@ using System.Xml.Linq;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
 using System.Data.Common;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 
 namespace AutoScript.Server
@@ -20,13 +22,16 @@ namespace AutoScript.Server
         {
             //Class1.dmtest();return;
             // HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
+       
             IHostBuilder builder = Host.CreateDefaultBuilder();
 
             builder.ConfigureHostConfiguration(config =>
             {
                 config.AddJsonFile("game.json");//��������ļ�
             });
+            builder.ConfigureLogging(logging => { logging.ClearProviders().AddSerilog(); });
 
+            //ConfigureServices(builder.Confi, builder.Services);
             //ע�����Ӷ�������
             builder.ConfigureServices((context, services) =>
             {
